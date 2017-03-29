@@ -10,7 +10,7 @@ export default class Main extends Component{
         return(
             <View>
                 <Text style={styles.welcome}>
-                    Welcome to React Native!Sports!d
+                    Welcome to React Native!Sports!ddd
                 </Text>
             </View>
         );
