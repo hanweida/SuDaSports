@@ -9,6 +9,8 @@ import {
     Image
 } from 'react-native'
 
+import Video from 'react-native-video';
+
 export default class List extends Component{
  constructor(props) {
         super(props);//这一句不能省略，照抄即可
@@ -21,6 +23,35 @@ export default class List extends Component{
         };
     }
 
+      _sel_detail(url){
+                console.log(url);
+            var responses = fetch(url)
+      .then((response) => response.text())
+      .then((responseText) => {
+        console.log(responseText);
+        return responseText;
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+            } 
+
+
+ _loadPage(url){
+     console.log(url);
+        //解构 与 模式匹配
+        let {navigator} = this.props;
+        if(navigator){
+            navigator.push({
+                name:'detail',
+                component:Detail,
+                params:{
+                    rowData:url
+                }
+            })
+        }
+
+    }
     _renderRow=(rowData, sectionID, rowID)=> {
           //    console.log(josnArray[0].prename);
         //    console.log(josnArray[0].prePic);
@@ -28,8 +59,9 @@ export default class List extends Component{
         //    console.log(josnArray[0].lastname);
         //    console.log(josnArray[0].lastPic);
         //    console.log(josnArray[0].videourl);
+    
     return (
-        <TouchableOpacity>
+        <TouchableOpacity onPress={()=>this._loadPage(rowData.videourl)}>
           <View>
             <View style={styles.row}>
               <Image style={styles.thumb} source={{uri:rowData.prePic}} />
@@ -84,15 +116,13 @@ export default class List extends Component{
     jiexi=(successMessage)=>{
          let zuobiao = successMessage.indexOf('<script src="/d/js/js/');
          let zuobiaoEnd = successMessage.indexOf('"></script>');
-         console.log(zuobiao);
-         console.log(zuobiaoEnd);
          let str = successMessage.substring(zuobiao+'<script src="'.length, zuobiaoEnd);
         // console.log(str);
          this.getByJsFile(str);
     }
 
     getByJsFile=(str)=>{
-        console.log('http://nba.tmiaoo.com'+str);
+        //console.log('http://nba.tmiaoo.com'+str);
          var responses = fetch('http://nba.tmiaoo.com'+str)
       .then((response) => response.text())
       .then((responseText) => {
@@ -208,7 +238,124 @@ export default class List extends Component{
     
 }
 
+class Detail extends Component{
+constructor(props) {
+        super(props);
+        this.state = {
+            url: "",
+            hosturl:"",
+            videourl:""
+        };
+    }
+
+    componentDidMount(){
+        this.setState({url:this.props.rowData});
+        console.log(this.state.url);
+        let reurl = this.state.url;
+        //var responses = fetch(this.props.rowData)
+         
+    var responses = fetch(this.props.rowData)
+      .then((response) => response.text())
+      .then((responseText) => {
+          //两种情况，一种是 有iframe  ，另一种没有ifram
+          console.log(responseText);
+        let startIndex = 0;
+             let endIndex = 0;
+             let srcJs = "";
+             let host="";
+        startIndex = responseText.indexOf('<iframe width="100%" height="100%" src="')+('<iframe width="100%" height="100%" src="').length;
+                        endIndex = responseText.indexOf('" frameborder="0"');
+                        srcJs=responseText.substring(startIndex,endIndex);
+        startIndex = srcJs.lastIndexOf("/")+1;        
+        host = srcJs.substr(0,startIndex);
+        this.setState({
+            hosturl:host
+        });
+        console.log(this.state.hosturl);
+        return srcJs;
+      }).then(
+        (srcJs)=>{
+            fetch(srcJs)
+             .then((response) => response.text())
+            .then((responseText) => {
+            let startIndex = 0;
+             let endIndex = 0;
+             let srcJs = "";
+            
+            startIndex = responseText.indexOf("</script>")+"</script>".length;
+            srcJs=responseText.substr(startIndex);
+            
+             startIndex = srcJs.indexOf('src="')+('src="').length;
+                        endIndex = srcJs.indexOf('" charset="utf-8">');
+                        console.log(startIndex);
+                        console.log(endIndex);
+                        srcJs=srcJs.substring(startIndex,endIndex);
+                        console.log(srcJs);
+                        srcJs=this.state.hosturl+srcJs
+                        console.log(srcJs);
+                        return srcJs;
+      }).then((srcJs)=>{
+           fetch(srcJs)
+            .then((response) => response.text())
+            .then((responseText) => {
+            let startIndex = 0;
+             let endIndex = 0;
+             let  srcJss= "";
+            
+            startIndex = responseText.indexOf("var video=['")+"var video=['".length;
+            endIndex = responseText.indexOf("',", startIndex);
+            srcJss=responseText.substring(startIndex, endIndex);
+            this.setState({
+                videourl:srcJss
+            });
+            console.log(srcJss);
+            })
+      })
+    }).catch((error) => {
+        console.error(error);
+      });
+
+    }
+
+ _pressButton() {
+        const { navigator } = this.props;
+        if (navigator) {
+            //很熟悉吧，入栈出栈~ 把当前的页面pop掉，这里就返回到了上一个页面:了
+            navigator.pop();
+        }
+    }
+    render() {
+        return (
+         <Video source={{uri: this.state.videourl, mainVer: 1, patchVer: 0}} // Looks for .mp4 file (background.mp4) in the given expansion version.
+       ref={(ref) => {
+         this.player = ref
+       }}
+       rate={1.0}                   // 0 is paused, 1 is normal. 速率
+       volume={1.0}                 // 0 is muted, 1 is normal.
+       muted={false}                // Mutes the audio entirely.
+       paused={false}               // Pauses playback entirely.
+       resizeMode="contain"           // Fill the whole screen at aspect ratio.
+       repeat={true}                // Repeat forever.
+       onLoadStart={this.loadStart} // Callback when video starts to load
+       onLoad={this.setDuration}    // Callback when video loads
+       onProgress={this.setTime}    // Callback every ~250ms with currentTime
+       onEnd={this.onEnd}           // Callback when playback finishes
+       onError={this.videoError}    // Callback when video cannot be loaded
+       style={styles.backgroundVideo} ></Video>
+        );
+
+
+    }
+}
+
 const styles = StyleSheet.create({
+      backgroundVideo: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    bottom: 0,
+    right: 0,
+},
         container:{
             flex:1
         },
