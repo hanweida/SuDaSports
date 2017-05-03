@@ -11,7 +11,7 @@ import {
 } from 'react-native'
 
 import Video from 'react-native-video';
-
+WEBVIEW_REF = 'webview';
 export default class List extends Component{
  constructor(props) {
         super(props);//这一句不能省略，照抄即可
@@ -53,6 +53,11 @@ export default class List extends Component{
         }
 
     }
+
+   goBack(){
+        this.refs[WEBVIEW_REF].goBack();
+    }
+    
     _renderRow=(rowData, sectionID, rowID)=> {
           //    console.log(josnArray[0].prename);
         //    console.log(josnArray[0].prePic);
@@ -99,8 +104,15 @@ export default class List extends Component{
         return (
             //onEndReached={this._fetchMoreData}
             <View style={styles.container}>
-                <Text>Header</Text>
+                <TouchableOpacity
+                    onPress={this.goBack.bind(this)}
+            >
+            <Text >
+               返回
+            </Text>
+          </TouchableOpacity>
                 <WebView
+                 ref={WEBVIEW_REF}
                  injectedJavaScript="(function(){document.getElementsByClassName('mv_head')[0].style.display='none'; document.getElementsByClassName('mv_app')[0].style.display='none';var divs =document.getElementsByTagName('div');var divAd = divs[divs.length-4].innerHTML; if(divAd.indexOf('广告') >-1 ){divs[divs.length-4].style.display='none';divAd='';}}()) "
                  //document.getElementsByClassName('mv_head')[0].style.display='none';}
                 //injectedJavaScript="document.getElementsByClassName('mv_head').innerHTML=''"
