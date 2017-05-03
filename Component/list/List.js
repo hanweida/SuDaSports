@@ -6,7 +6,8 @@ import {
     ListView,
     ListViewDataSource,
     TouchableOpacity,
-    Image
+    Image,
+    WebView
 } from 'react-native'
 
 import Video from 'react-native-video';
@@ -82,7 +83,8 @@ export default class List extends Component{
    }
 
     render(){
-        return (
+        //使用stirng 字符串截取，获得地址，方法不可行
+        /*return (
             //onEndReached={this._fetchMoreData}
             <View style={styles.container}>
                 <ListView
@@ -90,6 +92,25 @@ export default class List extends Component{
                     renderRow={this._renderRow}
 
                     style={styles.listView}
+                />
+            </View>
+        );*/
+        //采用webview方式
+        return (
+            //onEndReached={this._fetchMoreData}
+            <View style={styles.container}>
+                <Text>Header</Text>
+                <WebView
+                 injectedJavaScript="(function(){document.getElementsByClassName('mv_head')[0].style.display='none'; document.getElementsByClassName('mv_app')[0].style.display='none';var divs =document.getElementsByTagName('div');var divAd = divs[divs.length-4].innerHTML; if(divAd.indexOf('广告') >-1 ){divs[divs.length-4].style.display='none';divAd='';}}()) "
+                 //document.getElementsByClassName('mv_head')[0].style.display='none';}
+                //injectedJavaScript="document.getElementsByClassName('mv_head').innerHTML=''"
+                //injectedJavaScript="document.getElementsByTagName('mv_head')[0].innerHTML=''"
+                source={{uri: 'http://nba.tmiaoo.com'}}
+                    //source={{uri: 'http://nba.tmiaoo.com//le/lexl.php?leid=1020170429214037&?classid=3&id=9883'}}
+                    startInLoadingState={true}
+                    domStorageEnabled={true}
+                    javaScriptEnabled={true}
+                    automaticallyAdjustContentInsets={true}
                 />
             </View>
         );
@@ -100,6 +121,7 @@ export default class List extends Component{
         //http://nba.tmiaoo.com/nba.html
       var responses = fetch('http://s.tmiaoo.com/ipad.html')
       .then((response) => response.text())
+      //获得返回的html 文本
       .then((responseText) => {
        // console.log(responseText);
          this.jiexi(responseText);

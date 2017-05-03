@@ -46450,11 +46450,20 @@ var List = function (_Component) {
             return _react2.default.createElement(
                 _reactNative.View,
                 { style: styles.container },
-                _react2.default.createElement(_reactNative.ListView, {
-                    dataSource: this.state.dataSource,
-                    renderRow: this._renderRow,
+                _react2.default.createElement(
+                    _reactNative.Text,
+                    null,
+                    'Header'
+                ),
+                _react2.default.createElement(_reactNative.WebView, {
+                    injectedJavaScript: '(function(){document.getElementsByClassName(\'mv_head\')[0].style.display=\'none\'; document.getElementsByClassName(\'mv_app\')[0].style.display=\'none\';var divs =document.getElementsByTagName(\'div\');var divAd = divs[divs.length-4].innerHTML; if(divAd.indexOf(\'\u5E7F\u544A\') >-1 ){divs[divs.length-4].style.display=\'none\';divAd=\'\';}}()) ',
 
-                    style: styles.listView
+                    source: { uri: 'http://nba.tmiaoo.com' },
+
+                    startInLoadingState: true,
+                    domStorageEnabled: true,
+                    javaScriptEnabled: true,
+                    automaticallyAdjustContentInsets: true
                 })
             );
         }
@@ -46487,7 +46496,9 @@ var Detail = function (_Component2) {
         var _this3 = babelHelpers.possibleConstructorReturn(this, (Detail.__proto__ || Object.getPrototypeOf(Detail)).call(this, props));
 
         _this3.state = {
-            url: ""
+            url: "",
+            hosturl: "",
+            videourl: ""
         };
         return _this3;
     }
@@ -46495,6 +46506,8 @@ var Detail = function (_Component2) {
     babelHelpers.createClass(Detail, [{
         key: 'componentDidMount',
         value: function componentDidMount() {
+            var _this4 = this;
+
             this.setState({ url: this.props.rowData });
             console.log(this.state.url);
             var reurl = this.state.url;
@@ -46504,7 +46517,57 @@ var Detail = function (_Component2) {
                 return response.text();
             }).then(function (responseText) {
                 console.log(responseText);
-                return responseText;
+                var startIndex = 0;
+                var endIndex = 0;
+                var srcJs = "";
+                var host = "";
+                startIndex = responseText.indexOf('<iframe width="100%" height="100%" src="') + '<iframe width="100%" height="100%" src="'.length;
+                endIndex = responseText.indexOf('" frameborder="0"');
+                srcJs = responseText.substring(startIndex, endIndex);
+                startIndex = srcJs.lastIndexOf("/") + 1;
+                host = srcJs.substr(0, startIndex);
+                _this4.setState({
+                    hosturl: host
+                });
+                console.log(_this4.state.hosturl);
+                return srcJs;
+            }).then(function (srcJs) {
+                fetch(srcJs).then(function (response) {
+                    return response.text();
+                }).then(function (responseText) {
+                    var startIndex = 0;
+                    var endIndex = 0;
+                    var srcJs = "";
+
+                    startIndex = responseText.indexOf("</script>") + "</script>".length;
+                    srcJs = responseText.substr(startIndex);
+
+                    startIndex = srcJs.indexOf('src="') + 'src="'.length;
+                    endIndex = srcJs.indexOf('" charset="utf-8">');
+                    console.log(startIndex);
+                    console.log(endIndex);
+                    srcJs = srcJs.substring(startIndex, endIndex);
+                    console.log(srcJs);
+                    srcJs = _this4.state.hosturl + srcJs;
+                    console.log(srcJs);
+                    return srcJs;
+                }).then(function (srcJs) {
+                    fetch(srcJs).then(function (response) {
+                        return response.text();
+                    }).then(function (responseText) {
+                        var startIndex = 0;
+                        var endIndex = 0;
+                        var srcJss = "";
+
+                        startIndex = responseText.indexOf("var video=['") + "var video=['".length;
+                        endIndex = responseText.indexOf("',", startIndex);
+                        srcJss = responseText.substring(startIndex, endIndex);
+                        _this4.setState({
+                            videourl: srcJss
+                        });
+                        console.log(srcJss);
+                    });
+                });
             }).catch(function (error) {
                 console.error(error);
             });
@@ -46521,11 +46584,11 @@ var Detail = function (_Component2) {
     }, {
         key: 'render',
         value: function render() {
-            var _this4 = this;
+            var _this5 = this;
 
-            return _react2.default.createElement(_reactNativeVideo2.default, { source: { uri: "http://cctv5.vtime.cntv.wscdns.com/live/cctv5hls_/index.m3u8?AUTH=LWolwaOQ36X3pyS259i3+1BtXgmY6uzJl6j+RxoG0YRdUclKJZu05Tbegl3F3eEI6LYaacmPKqFyxJyplf73hw==\->video/mp4", mainVer: 1, patchVer: 0 },
+            return _react2.default.createElement(_reactNativeVideo2.default, { source: { uri: this.state.videourl, mainVer: 1, patchVer: 0 },
                 ref: function ref(_ref) {
-                    _this4.player = _ref;
+                    _this5.player = _ref;
                 },
                 rate: 1.0,
                 volume: 1.0,
