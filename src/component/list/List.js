@@ -11,6 +11,8 @@ import {
 } from 'react-native'
 
 import Video from 'react-native-video';
+import Header from '../header';
+import Footer from '../foot';
 WEBVIEW_REF = 'webview';
 export default class List extends Component{
  constructor(props) {
@@ -100,17 +102,19 @@ export default class List extends Component{
                 />
             </View>
         );*/
+
         //采用webview方式
         return (
             //onEndReached={this._fetchMoreData}
             <View style={styles.container}>
-                <TouchableOpacity
+                <Header></Header>
+                {/*<TouchableOpacity
                     onPress={this.goBack.bind(this)}
-            >
-            <Text >
-               返回
-            </Text>
-          </TouchableOpacity>
+                    >
+                    <Text >
+                    返回
+                    </Text>
+                </TouchableOpacity>*/}
                 <WebView
                  ref={WEBVIEW_REF}
                  injectedJavaScript="(function(){document.getElementsByClassName('mv_head')[0].style.display='none'; document.getElementsByClassName('mv_app')[0].style.display='none';var divs =document.getElementsByTagName('div');var divAd = divs[divs.length-4].innerHTML; if(divAd.indexOf('广告') >-1 ){divs[divs.length-4].style.display='none';divAd='';}}()) "
@@ -124,6 +128,7 @@ export default class List extends Component{
                     javaScriptEnabled={true}
                     automaticallyAdjustContentInsets={true}
                 />
+                <Footer></Footer>
             </View>
         );
     }

@@ -7,7 +7,7 @@ import {
     View
 } from 'react-native'
 
-import List from './Component/list/List'
+import List from './src/component/list/List'
 export default class App extends Component {
     constructor(props){
         super(props);
