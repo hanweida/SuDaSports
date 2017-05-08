@@ -14,6 +14,7 @@ import Video from 'react-native-video';
 import Header from '../header';
 import Footer from '../foot';
 WEBVIEW_REF = 'webview';
+import px2dp from '../../util/px2dp'
 export default class List extends Component{
  constructor(props) {
         super(props);//这一句不能省略，照抄即可
@@ -127,6 +128,7 @@ export default class List extends Component{
                     domStorageEnabled={true}
                     javaScriptEnabled={true}
                     automaticallyAdjustContentInsets={true}
+                    style={styles.webViewstyle}
                 />
                 <Footer></Footer>
             </View>
@@ -388,28 +390,31 @@ constructor(props) {
 }
 
 const styles = StyleSheet.create({
-      backgroundVideo: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    bottom: 0,
-    right: 0,
-},
-        container:{
-            flex:1
-        },
-        listView: {
-            paddingTop: 20,
-            backgroundColor: 'white',
-        },
-         thumb: {
-    width: 50,
-    height: 50,
-  },
+    backgroundVideo: {
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        bottom: 0,
+        right: 0,
+    },
+    container:{
+        flex:1
+    },
+    listView: {
+        paddingTop: 20,
+        backgroundColor: 'white',
+    },
+    webViewstyle:{
+        height: 500,
+    },
+    thumb: {
+        width: 50,
+        height: 50,
+    },
    row: {
     flexDirection: 'row',
     justifyContent: 'center',
     padding: 10,
     backgroundColor: '#F6F6F6',
-  },
+  }, 
 });

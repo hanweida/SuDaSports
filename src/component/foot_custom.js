@@ -10,7 +10,8 @@ import {
     StyleSheet,
     Text,
     TouchableOpacity,
-    View
+    View,
+    Image
 } from 'react-native';
 
 export default class foot_custom extends Component {
@@ -36,6 +37,7 @@ export default class foot_custom extends Component {
     componentDidMount() {
 		// Animated.Value监听范围 [0, tab数量-1]
 		this.props.scrollValue.addListener(this.setAnimationValue);
+        console.log(this.props.tabIconNames[1]);
 	}
 
     setAnimationValue({value}) {
@@ -48,10 +50,9 @@ export default class foot_custom extends Component {
 		return (
 			<TouchableOpacity onPress={()=>this.props.goToPage(i)} style={styles.tab} key={tab}>
 				<View style={styles.tabItem}>
-					<Icon
-						name={this.props.tabIconNames[i]} // 图标
-						size={30}
-						color={color}/>
+                    <Image
+                        source={this.props.tabIconNames[i]}
+                    ></Image>
 					<Text style={{color: color}}>
 						{this.props.tabNames[i]}
 					</Text>
@@ -66,7 +67,6 @@ export default class foot_custom extends Component {
 const styles = StyleSheet.create({
     tabs: {
 		flexDirection: 'row',
-		height: 50,
 	},
 
 	tab: {

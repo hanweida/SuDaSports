@@ -7,15 +7,16 @@ import {
     Image
 } from 'react-native'
 
-//import FootCustom from './foot_custom';
+import FootCustom from './foot_custom';
 import ScrollableTabView  from 'react-native-scrollable-tab-view';
+import px2dp from '../util/px2dp'
 export default class Footer extends Component{
     constructor(props) {
     super(props);
 
     this.state = {
       tabNames: ['首页', '赛程', '新闻'],
-      tabIconNames: ['../img/tab_icon_home_default@2x.png', 'tab_icon_news_default@2x.png', 'tab_icon_schedule_default@2x.png'],
+      tabIconNames: [require('../img/tab_icon_home_default@2x.png'), require('../img/tab_icon_news_default@2x.png'), require('../img/tab_icon_schedule_default@2x.png')],
     };
   }
 
@@ -23,11 +24,10 @@ export default class Footer extends Component{
     let tabNames = this.state.tabNames;
     let tabIconNames = this.state.tabIconNames;
     return (
-        <View></View>
-      /*<ScrollableTabView
+      <ScrollableTabView
         renderTabBar={() => <FootCustom tabNames={tabNames} tabIconNames={tabIconNames}/>}
         tabBarPosition='bottom'
-
+        style={styles.footer}
         onChangeTab={
           (obj) => {
             console.log('被选中的tab下标：' + obj.i);
@@ -47,9 +47,16 @@ export default class Footer extends Component{
         <View tabLabel="1" style={styles.center}></View>
         <View tabLabel="2" style={styles.center}></View>
         <View tabLabel="3" style={styles.center}></View>
-        <View tabLabel="4" style={styles.center}></View>
-        <View tabLabel="5" style={styles.center}></View>
-      </ScrollableTabView>*/
+      </ScrollableTabView>
     );
   }
 }
+
+const styles = StyleSheet.create({
+     footer:{
+      borderTopColor :'#FC4035',
+      borderTopWidth:px2dp(2),
+      height: px2dp(1)
+  }
+
+});
