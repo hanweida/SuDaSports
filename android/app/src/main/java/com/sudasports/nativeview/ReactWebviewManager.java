@@ -24,11 +24,6 @@ public class ReactWebviewManager extends SimpleViewManager<X5WebView> {
         return new X5WebView(reactContext);
     }
 
-    @Override
-    public void onDropViewInstance(X5WebView view) {
-        super.onDropViewInstance(view);
-    }
-
     @ReactProp(name = "source")
     public void setSource(X5WebView x5WebView, @Nullable String source){
         System.out.println("setSource Invoke");
