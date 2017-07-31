@@ -18,11 +18,11 @@
         android:layout_weight="1"
         android:orientation="vertical" >
 
-        <FrameLayout
+        <com.sudasports.utils.X5WebView
             android:id="@+id/webView1"
             android:layout_width="match_parent"
             android:layout_height="match_parent" >
-        </FrameLayout>
+        </com.sudasports.utils.X5WebView>
         <TextView
             android:id="@+id/logView1"
             android:layout_width="match_parent"

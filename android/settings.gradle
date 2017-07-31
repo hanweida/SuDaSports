@@ -1,4 +1,8 @@
 rootProject.name = 'SuDaSports'
+include ':react-native-x5'
+project(':react-native-x5').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-x5/android')
+include ':react-native-x5'
+project(':react-native-x5').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-x5/android')
 
 include ':app'
 include ':react-native-video'

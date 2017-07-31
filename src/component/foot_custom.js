@@ -13,7 +13,7 @@ import {
     View,
     Image
 } from 'react-native';
-
+import px2dp from '../util/px2dp'
 export default class foot_custom extends Component {
     static propTypes = {
         goToPage: React.PropTypes.func, // 跳转到对应tab的方法
@@ -36,7 +36,7 @@ export default class foot_custom extends Component {
 
     componentDidMount() {
 		// Animated.Value监听范围 [0, tab数量-1]
-		this.props.scrollValue.addListener(this.setAnimationValue);
+		//this.props.scrollValue.addListener(this.setAnimationValue);
         console.log(this.props.tabIconNames[1]);
 	}
 
@@ -46,14 +46,15 @@ export default class foot_custom extends Component {
 
 
     renderTabOption(tab, i) {
-		let color = this.props.activeTab == i ? "#6B8E23" : "#ADADAD"; // 判断i是否是当前选中的tab，设置不同的颜色
+		let pic = this.props.activeTab == i ?  this.props.tabIconNamesSelect[i] : this.props.tabIconNames[i] ; // 判断i是否是当前选中的tab，设置不同的颜色
+		let color = this.props.activeTab == i ?  "#FC4035": "#999999" ; // 判断i是否是当前选中的tab，设置不同的颜色
 		return (
 			<TouchableOpacity onPress={()=>this.props.goToPage(i)} style={styles.tab} key={tab}>
 				<View style={styles.tabItem}>
                     <Image
-                        source={this.props.tabIconNames[i]}
+                        source={pic}
                     ></Image>
-					<Text style={{color: color}}>
+					<Text style={{color: color, fontSize :px2dp(30)}}>
 						{this.props.tabNames[i]}
 					</Text>
 				</View>
@@ -66,7 +67,11 @@ export default class foot_custom extends Component {
 
 const styles = StyleSheet.create({
     tabs: {
+		borderTopWidth:px2dp(2),
+		height:px2dp(147),
 		flexDirection: 'row',
+		borderTopColor:'#CCCCCC',
+		
 	},
 
 	tab: {
@@ -79,6 +84,5 @@ const styles = StyleSheet.create({
 		flexDirection: 'column',
 		alignItems: 'center',
 	},
-
 });
 

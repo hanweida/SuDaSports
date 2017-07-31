@@ -1,0 +1,48 @@
+/**
+ * Sample React Native App
+ * https://github.com/facebook/react-native
+ * @flow
+ */
+
+import React, { Component } from 'react';
+import {
+  AppRegistry,
+  StyleSheet,
+  TouchableOpacity,
+  View,
+  Text,
+  NativeModules
+} from 'react-native';
+
+import App from './App'
+import RCTWebView from './src/component/nativemodules/CustomWebView'
+
+export default class SuDaSports extends Component {
+_click(){
+     NativeModules.WebviewRNModule.show('正在打开视频');
+  }
+
+  render() {
+    return (
+    <View style={styles.container}>
+          <TouchableOpacity
+              onPress={this._click}
+          >
+            <Text>测试</Text>
+          </TouchableOpacity>
+        </View>
+    );
+  }
+}
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    webView: {
+        flex: 1
+    }
+});
+AppRegistry.registerComponent('SuDaSports', () => SuDaSports);
