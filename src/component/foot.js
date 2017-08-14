@@ -113,7 +113,7 @@ export default class Footer extends Component{
                     mediaPlaybackRequiresUserAction={true}
                     
                 />
-                 <TouchableOpacity
+        <TouchableOpacity
           style={styles.button}
         >
           <Text style={styles.instructions}>

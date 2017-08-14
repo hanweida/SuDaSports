@@ -35,7 +35,7 @@ export default class List extends Component{
         //获得返回的html 文本
         .then((responseText) => {
          //console.log(responseText);
-         this.jiexi(responseText);
+         //this.jiexi(responseText);
          return responseText;
       })
       .catch((error) => {

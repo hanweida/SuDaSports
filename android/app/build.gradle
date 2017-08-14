@@ -94,7 +94,7 @@ android {
         versionName "1.0"
         multiDexEnabled true
         ndk {
-            abiFilters "armeabi-v7a", "x86"
+            abiFilters"armeabi","armeabi-v7a","x86","mips"
         }
     }
 	
