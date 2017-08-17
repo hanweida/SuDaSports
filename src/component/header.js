@@ -15,15 +15,24 @@ import px2dp from '../util/px2dp';
  export default class Header extends Component{
     constructor(props) {  
         super(props);  
-        this.state = { pressStatus: false };  
+        this.state = {
+            pressStatus: false,
+            button_index:0
+        };
     } 
 
-    _onHideUnderlay(){  
-        this.setState({ pressStatus: false });  
+    _onHideUnderlay(index){
+        this.setState({
+            pressStatus: false,
+            button_index:index
+        });
     }  
   
-    _onShowUnderlay(){  
-        this.setState({ pressStatus: true });  
+    _onShowUnderlay(index){
+        this.setState({
+            pressStatus: true,
+            button_index:index
+        });
     } 
 
     onPressLearnMore = () => {
@@ -44,31 +53,40 @@ import px2dp from '../util/px2dp';
                     style={styles.statusbar}
                 />
                 <TouchableHighlight
-                    onHideUnderlay={this._onHideUnderlay.bind(this)}
-                    onShowUnderlay={this._onShowUnderlay.bind(this)} 
-                    onPress={() => {  
-                        console.log('Press Change Style Button');  
-                    }}  
-                     style={[styles.button_tab,styles.button_left_tab,this.state.pressStatus ? styles.pressbutton:styles.unpressbutton]}>
+                    onHideUnderlay={this._onHideUnderlay.bind(this, 0)}
+                    onShowUnderlay={this._onShowUnderlay.bind(this, 0)}
+                    onPress={() => {
+                    }}
+                    underlayColor='#FFFFFF'
+                    style={[styles.button_tab,styles.button_left_tab,(this.state.pressStatus && 0 == this.state.button_index) ? styles.press_button:styles.unpress_button]}>
                      <View style={styles.button_text_view}>
-                        <Text style={styles.button_text}>
+                        <Text style={[styles.button_text, (this.state.pressStatus && 0 == this.state.button_index) ? styles.press_button_text:styles.unpress_button_text]}>
                             直播
                         </Text>
                      </View>
                 </TouchableHighlight>
                <TouchableHighlight
-                     style={[styles.button_tab,styles.button_center_tab]}>
+                   onHideUnderlay={this._onHideUnderlay.bind(this, 1)}
+                   onShowUnderlay={this._onShowUnderlay.bind(this, 1)}
+                   onPress={() => {
+                    }}
+                   underlayColor='#FFFFFF'
+                   style={[styles.button_tab,styles.button_center_tab,(this.state.pressStatus && 1 == this.state.button_index) ? styles.press_button:styles.unpress_button]}>
                      <View style={styles.button_text_view}>
-                        <Text style={styles.button_text}>
+                         <Text style={[styles.button_text, (this.state.pressStatus && 1 == this.state.button_index) ? styles.press_button_text:styles.unpress_button_text]}>
                             新闻
                          </Text>
                      </View>
-                 
                 </TouchableHighlight>
                 <TouchableHighlight
-                     style={[styles.button_tab,styles.button_right_tab]}>
+                    onHideUnderlay={this._onHideUnderlay.bind(this, 2)}
+                    onShowUnderlay={this._onShowUnderlay.bind(this, 2)}
+                    onPress={() => {
+                    }}
+                    underlayColor='#FFFFFF'
+                    style={[styles.button_tab,styles.button_right_tab,(this.state.pressStatus && 2 == this.state.button_index) ? styles.press_button:styles.unpress_button]}>
                       <View style={styles.button_text_view}>
-                          <Text style={styles.button_text}>
+                          <Text style={[styles.button_text, (this.state.pressStatus && 2 == this.state.button_index) ? styles.press_button_text:styles.unpress_button_text]}>
                             狂言NBA
                         </Text>
                       </View>
@@ -117,11 +135,21 @@ const styles = StyleSheet.create({
         fontFamily:'PingFangSC-Regular',
         color:'#FFFFFF'
     },
-    pressbutton:{
-        backgroundColor: '#FFFFFF',
+    unpress_button_text:{
+        fontSize:15,
+        fontFamily:'PingFangSC-Regular',
+        color:'#FFFFFF'
     },
-    unpressbutton:{
-        backgroundColor: '#FFFFFF ',
+    press_button_text:{
+        fontSize:15,
+        fontFamily:'PingFangSC-Regular',
+        color:'#F66A85'
+    },
+    press_button:{
+        backgroundColor: '#FFFFFF'
+    },
+    unpress_button:{
+        backgroundColor: '#F66A85',
     },
     app_name:{
       
