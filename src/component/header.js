@@ -19,13 +19,24 @@ import px2dp from '../util/px2dp';
             pressStatus: false,
             button_index:0
         };
-    } 
+    }
 
+     componentDidMount() {
+         this._onHideUnderlay(0);
+     }
     _onHideUnderlay(index){
-        this.setState({
-            pressStatus: false,
-            button_index:index
-        });
+        if(index == this.state.button_index){
+            this.setState({
+                pressStatus: true,
+                button_index:index
+            });
+        } else {
+            this.setState({
+                pressStatus: false,
+                button_index:index
+            });
+        }
+
     }  
   
     _onShowUnderlay(index){
