@@ -11,7 +11,6 @@ import {
     TouchableHighlight
 } from 'react-native'
 
-import px2dp from '../util/px2dp';
  export default class Header extends Component{
     constructor(props) {  
         super(props);  
@@ -36,17 +35,16 @@ import px2dp from '../util/px2dp';
                 button_index:index
             });
         }
-
-    }  
+    }
   
     _onShowUnderlay(index){
         this.setState({
             pressStatus: true,
             button_index:index
         });
-    } 
+    }
 
-    onPressLearnMore = () => {
+     _onPress(){
         Alert.alert('Button has been pressed!');
     };
 
@@ -66,8 +64,7 @@ import px2dp from '../util/px2dp';
                 <TouchableHighlight
                     onHideUnderlay={this._onHideUnderlay.bind(this, 0)}
                     onShowUnderlay={this._onShowUnderlay.bind(this, 0)}
-                    onPress={() => {
-                    }}
+                    onPress={this._onPress.bind(this, 0)}
                     underlayColor='#FFFFFF'
                     style={[styles.button_tab,styles.button_left_tab,(this.state.pressStatus && 0 == this.state.button_index) ? styles.press_button:styles.unpress_button]}>
                      <View style={styles.button_text_view}>
@@ -79,8 +76,7 @@ import px2dp from '../util/px2dp';
                <TouchableHighlight
                    onHideUnderlay={this._onHideUnderlay.bind(this, 1)}
                    onShowUnderlay={this._onShowUnderlay.bind(this, 1)}
-                   onPress={() => {
-                    }}
+                   onPress={this._onPress.bind(this, 1)}
                    underlayColor='#FFFFFF'
                    style={[styles.button_tab,styles.button_center_tab,(this.state.pressStatus && 1 == this.state.button_index) ? styles.press_button:styles.unpress_button]}>
                      <View style={styles.button_text_view}>
@@ -92,8 +88,7 @@ import px2dp from '../util/px2dp';
                 <TouchableHighlight
                     onHideUnderlay={this._onHideUnderlay.bind(this, 2)}
                     onShowUnderlay={this._onShowUnderlay.bind(this, 2)}
-                    onPress={() => {
-                    }}
+                    onPress={this._onPress.bind(this, 2)}
                     underlayColor='#FFFFFF'
                     style={[styles.button_tab,styles.button_right_tab,(this.state.pressStatus && 2 == this.state.button_index) ? styles.press_button:styles.unpress_button]}>
                       <View style={styles.button_text_view}>
