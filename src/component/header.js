@@ -61,42 +61,6 @@ import {
                     networkActivityIndicatorVisible={true}
                     style={styles.statusbar}
                 />
-                <TouchableHighlight
-                    onHideUnderlay={this._onHideUnderlay.bind(this, 0)}
-                    onShowUnderlay={this._onShowUnderlay.bind(this, 0)}
-                    onPress={this._onPress.bind(this, 0)}
-                    underlayColor='#FFFFFF'
-                    style={[styles.button_tab,styles.button_left_tab,(this.state.pressStatus && 0 == this.state.button_index) ? styles.press_button:styles.unpress_button]}>
-                     <View style={styles.button_text_view}>
-                        <Text style={[styles.button_text, (this.state.pressStatus && 0 == this.state.button_index) ? styles.press_button_text:styles.unpress_button_text]}>
-                            直播
-                        </Text>
-                     </View>
-                </TouchableHighlight>
-               <TouchableHighlight
-                   onHideUnderlay={this._onHideUnderlay.bind(this, 1)}
-                   onShowUnderlay={this._onShowUnderlay.bind(this, 1)}
-                   onPress={this._onPress.bind(this, 1)}
-                   underlayColor='#FFFFFF'
-                   style={[styles.button_tab,styles.button_center_tab,(this.state.pressStatus && 1 == this.state.button_index) ? styles.press_button:styles.unpress_button]}>
-                     <View style={styles.button_text_view}>
-                         <Text style={[styles.button_text, (this.state.pressStatus && 1 == this.state.button_index) ? styles.press_button_text:styles.unpress_button_text]}>
-                            新闻
-                         </Text>
-                     </View>
-                </TouchableHighlight>
-                <TouchableHighlight
-                    onHideUnderlay={this._onHideUnderlay.bind(this, 2)}
-                    onShowUnderlay={this._onShowUnderlay.bind(this, 2)}
-                    onPress={this._onPress.bind(this, 2)}
-                    underlayColor='#FFFFFF'
-                    style={[styles.button_tab,styles.button_right_tab,(this.state.pressStatus && 2 == this.state.button_index) ? styles.press_button:styles.unpress_button]}>
-                      <View style={styles.button_text_view}>
-                          <Text style={[styles.button_text, (this.state.pressStatus && 2 == this.state.button_index) ? styles.press_button_text:styles.unpress_button_text]}>
-                            狂言NBA
-                        </Text>
-                      </View>
-                </TouchableHighlight>
             </View>
         );
     }    
@@ -105,7 +69,7 @@ import {
 const styles = StyleSheet.create({
     container:{
         flexDirection:'row',
-        height: 48,
+        height: 0,
         justifyContent:'center',
         borderBottomColor:'#F66A85',
          backgroundColor:'#F66A85'
