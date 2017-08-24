@@ -41,14 +41,17 @@ export default class foot_custom extends Component {
     renderTabOption(tab, i) {
 		let color = this.props.activeTab == i ?  "#FC4035": "#999999" ; // 判断i是否是当前选中的tab，设置不同的颜色
 		return (
-			<View style={{flex:1}}>
-				<TouchableOpacity onPress={()=>this.props.goToPage(i)} style={styles.tab} key={tab}>
-					<View style={styles.tabItem}>
-						<Text style={{color: color, fontSize :15}}>
-							{this.props.tabNames[i]}
-						</Text>
-					</View>
-				</TouchableOpacity>
+			<View style={{flex:1,flexDirection: 'row',}}>
+				<View style={{flex:1}}>
+					<TouchableOpacity onPress={()=>this.props.goToPage(i)} style={styles.tab} key={tab}>
+						<View style={styles.tabItem}>
+							<Text style={{color: color, fontSize :15}}>
+								{this.props.tabNames[i]}
+							</Text>
+						</View>
+					</TouchableOpacity>
+				</View>
+				<View style={{backgroundColor:'#000000',width:1,height:22}}></View>
 			</View>
 		);
 	}
