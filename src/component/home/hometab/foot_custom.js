@@ -18,9 +18,7 @@ export default class foot_custom extends Component {
         goToPage: React.PropTypes.func, // 跳转到对应tab的方法
 		activeTab: React.PropTypes.number, // 当前被选中的tab下标
 		tabs: React.PropTypes.array, // 所有tabs集合
-
 		tabNames: React.PropTypes.array, // 保存Tab名称
-
     };  // 注意这里有分号
 
 
@@ -43,7 +41,7 @@ export default class foot_custom extends Component {
 		return (
 			<View style={{flex:1,flexDirection: 'row',}}>
 				<View style={{flex:1}}>
-					<TouchableOpacity onPress={()=>this.props.goToPage(i)} style={styles.tab} key={tab}>
+					<TouchableOpacity onPress={()=>this.props.goToPage(i)} style={styles.tab} >
 						<View style={styles.tabItem}>
 							<Text style={{color: color, fontSize :15}}>
 								{this.props.tabNames[i]}
@@ -51,7 +49,7 @@ export default class foot_custom extends Component {
 						</View>
 					</TouchableOpacity>
 				</View>
-				<View style={{backgroundColor:'#000000',width:1,height:22}}></View>
+				<View style={{backgroundColor:'#E7E7E7',width:1,height:22,alignSelf: 'center'}}></View>
 			</View>
 		);
 	}
@@ -74,8 +72,8 @@ const styles = StyleSheet.create({
 		flex:1,
 		justifyContent: 'center',
 		alignItems:'center',
-		borderWidth:1,
-		borderColor:'#E7E7E7',
+		borderBottomWidth:1,
+		borderBottomColor:'#E7E7E7',
 		backgroundColor:'#FFFFFF',
 
 	},

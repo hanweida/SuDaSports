@@ -20,7 +20,7 @@ export default class Zhibo_All extends Component{
     constructor(props) {
         super(props);
         this.state = {
-            tabNames: ['首页', '赛程'],
+            tabNames: ['全部', 'NBA'],
         };
     }
 
