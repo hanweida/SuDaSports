@@ -102,6 +102,7 @@ import {
 } from 'react-navigation';
 
 import ZhiBoScreen from  './home/homepage/ZhiBoScreen'
+import Home from  './home/homepage/Home'
 
 
 class MyNotificationsScreen extends React.Component {
@@ -224,7 +225,7 @@ const styles = StyleSheet.create({
 const SimpleTabNavigator = TabNavigator(
     {
         首页: {
-            screen: ZhiBoScreen,
+            screen: Home,
         },
         Notifications: {
             screen: MyNotificationsScreen,

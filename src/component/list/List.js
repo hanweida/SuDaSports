@@ -13,7 +13,6 @@ import {
 import Header from '../header';
 import Footer from '../foot';
 WEBVIEW_REF = 'webview';
-import px2dp from '../../util/px2dp'
 export default class List extends Component{
  constructor(props) {
         super(props);//这一句不能省略，照抄即可

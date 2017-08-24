@@ -15,7 +15,6 @@ export default class SuDaSports extends Component {
   render() {
     return (
     <App>
-        
     </App>
     );
   }
