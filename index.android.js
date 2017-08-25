@@ -6,7 +6,8 @@
 
 import React, { Component } from 'react';
 import {
-  AppRegistry
+  AppRegistry,
+  FlatList
 } from 'react-native';
 
 import App from './App'

@@ -75,7 +75,7 @@ export default class Home extends Component {
                         tabsContainerStyle={{ height: 30, backgroundColor: '#F66A85',width:258,alignSelf:'center'}}
                         tabStyle={{ backgroundColor: '#F66A85', borderWidth: 0,borderColor:'#FFFFFF', borderStyle :'solid',borderWidth:1, }}
                         activeTabStyle={{ backgroundColor: 'white', marginTop: 0, }}
-                        tabTextStyle={{ color: '#FFFFFF', fontWeight: 'bold' }}
+                        tabTextStyle={{ color: '#FFFFFF'}}
                         activeTabTextStyle={{ color: '#F66A85' }} />
                 </View>
 
