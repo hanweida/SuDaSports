@@ -18,8 +18,7 @@ import {
 
 import SegmentedControlTab from 'react-native-segmented-control-tab'
 import ScrollableTabView  from 'react-native-scrollable-tab-view';
-import Zhibo_All from '../hometab/Zhibo_All'
-import Zhibo_NBA from '../hometab/Zhibo_NBA'
+import Zhibo_Tab from '../hometab/Zhibo_Tab'
 
 export default class Home extends Component {
     constructor(props) {
@@ -82,7 +81,7 @@ export default class Home extends Component {
                 <View style={styles.container}>
                     {this.state.customStyleIndex === 0 &&
                         <View style={styles.container}>
-                            <Zhibo_All></Zhibo_All>
+                            <Zhibo_Tab></Zhibo_Tab>
                         </View>
                     }
                     {this.state.customStyleIndex === 1 &&

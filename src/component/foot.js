@@ -16,7 +16,6 @@ import FootCustom from './foot_custom';
 import ScrollableTabView  from 'react-native-scrollable-tab-view';
 import SimpleTabNavigator  from './SimpleTabNavigator';
 
-
 import px2dp from '../util/px2dp'
 WEBVIEW_REF = 'webview';
 export default class Footer extends Component{
@@ -72,7 +71,7 @@ export default class Footer extends Component{
 }
 
 const styles = StyleSheet.create({
-     footer:{
+  footer:{
       borderTopColor :'#FC4035',
       borderTopWidth:1,
       height: 10
