@@ -9,6 +9,8 @@ import {
 import List from './src/component/list/List'
 import Header from './src/component/header';
 import Footer from './src/component/foot';
+import FlatList_All from './src/component/home/homepage/FlatList_All';
+
 
 export default class App extends Component {
     constructor(props){
@@ -16,14 +18,12 @@ export default class App extends Component {
     }
 
     render(){
-        return( 
-            <View style={styles.container}>
-                <Header></Header>
-                 <Footer></Footer>
-            </View>
-        );
-    }
-}
+        return(
+        <FlatList_All>
+
+        </FlatList_All>);
+
+}}
 const styles = StyleSheet.create({
     container:{
         flex:1
