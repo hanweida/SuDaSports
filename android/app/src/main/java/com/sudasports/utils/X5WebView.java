@@ -27,19 +27,14 @@ public class X5WebView extends WebView {
 
 	TextView title;
 	private WebViewClient client = new WebViewClient() {
-		@Override
-		public WebResourceResponse shouldInterceptRequest(WebView webView, String s) {
-			System.out.println("shouldInterceptRequest");
-			return super.shouldInterceptRequest(webView, s);
-		}
 
 		@Override
 		public WebResourceResponse shouldInterceptRequest(WebView webView, WebResourceRequest webResourceRequest) {
-			if(webResourceRequest.getUrl().getHost().contains("mm.jgchq.com")){
+
+			if(webResourceRequest.getUrl().getHost().contains("mm.jgchq.com") || webResourceRequest.getUrl().getHost().matches("sy.(.*).com")){
 				System.out.println("shouldInterceptRequest" + webResourceRequest.getUrl().getHost());
 				return new WebResourceResponse();
 			}
-
 			return super.shouldInterceptRequest(webView, webResourceRequest);
 		}
 
@@ -55,10 +50,14 @@ public class X5WebView extends WebView {
 		@Override
 		public void onPageFinished(WebView view, String url) {
 			super.onPageFinished(view, url);
+			System.out.println("shouldOverrideUrlLoading" + url);
+			view.loadUrl("javascript:alert('aaaaa');");
 			// mTestHandler.sendEmptyMessage(MSG_OPEN_TEST_URL);
 			//mTestHandler.sendEmptyMessageDelayed(MSG_OPEN_TEST_URL, 5000);// 5s?
 				/* mWebView.showLog("test Log"); */
 		}
+
+
 	};
 
 	@SuppressLint("SetJavaScriptEnabled")
