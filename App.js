@@ -10,7 +10,7 @@ import List from './src/component/list/List'
 import Header from './src/component/header';
 import Footer from './src/component/foot';
 import FlatList_All from './src/component/home/homepage/FlatList_All';
-
+import Zhibo_Tab from './src/component/home/hometab/Zhibo_Tab'
 
 export default class App extends Component {
     constructor(props){
@@ -18,10 +18,18 @@ export default class App extends Component {
     }
 
     render(){
-        return(
-        <FlatList_All>
+        // return(
+        //     <View style={styles.container}>
+        //         <FlatList_All></FlatList_All>
+        //     </View>
+        // );
 
-        </FlatList_All>);
+        return(
+            <View style={styles.container}>
+                <Header></Header>
+                <Footer></Footer>
+            </View>
+        );
 
 }}
 const styles = StyleSheet.create({

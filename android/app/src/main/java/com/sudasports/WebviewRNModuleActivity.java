@@ -24,7 +24,7 @@ public class WebviewRNModuleActivity extends ReactContextBaseJavaModule {
     public void show(String message){
         Intent intent = new Intent(mContext, WebviewActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        Uri data = Uri.parse("http://www.jrszhibo.com");
+        Uri data = Uri.parse(message);
         intent.putExtra("message", message);
         intent.setData(data);
         mContext.startActivity(intent);

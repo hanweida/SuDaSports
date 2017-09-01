@@ -15,6 +15,7 @@ import {
 import FootCustom from './foot_custom';
 import ScrollableTabView  from 'react-native-scrollable-tab-view';
 import Zhibo_All from './Zhibo_All'
+import FlatList_All from '../homepage/FlatList_All'
 
 export default class Zhibo_Tab extends Component{
     constructor(props) {
@@ -26,18 +27,18 @@ export default class Zhibo_Tab extends Component{
 
     componentWillMount() {
         if (Platform.OS === 'android') {
-            BackAndroid.addEventListener('hardwareBackPress', this.onBackAndroid);
+            //BackAndroid.addEventListener('hardwareBackPress', this.onBackAndroid);
 
             // BackAndroid.addEventListener('hardwareBackPress', this.onBackAndroid);
         }
     }
     componentWillUnmount() {
-        if (Platform.OS === 'android') {
-            BackAndroid.addEventListener('hardwareBackPress', function() {
-                this.onBackAndroid;
-                return true;
-            });
-        }
+        // if (Platform.OS === 'android') {
+        //     BackAndroid.addEventListener('hardwareBackPress', function() {
+        //         this.onBackAndroid;
+        //         return true;
+        //     });
+        // }
     }
     onBackAndroid = () => {
         ToastAndroid.show('This is a toast with short duration', ToastAndroid.SHORT);
@@ -88,14 +89,12 @@ export default class Zhibo_Tab extends Component{
             >
 
                 <View tabLabel="1" style={styles.center}>
-                    <Zhibo_All
-                    >
-                    </Zhibo_All>
+                    <Text>dddddd</Text>
                 </View>
                 <View tabLabel="2" style={styles.center}>
-                     <Zhibo_All
-                    >
-                    </Zhibo_All>
+                    <View>
+                        <Text>dddddd</Text>
+                    </View>
                 </View>
             </ScrollableTabView>
         );
@@ -107,6 +106,10 @@ const styles = StyleSheet.create({
         borderTopColor :'#FC4035',
         borderTopWidth:1,
         height: 2
+    },
+    center:{
+
+        flex:1
     },
     button: {
         padding: 5,

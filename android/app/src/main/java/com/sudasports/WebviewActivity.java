@@ -59,6 +59,7 @@ public class WebviewActivity  extends AppCompatActivity {
 
     private URL mIntentUrl;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,7 +69,7 @@ public class WebviewActivity  extends AppCompatActivity {
 		 */
         setContentView(R.layout.activity_my);
         mWebView = (X5WebView) findViewById(R.id.webView1);
-        mWebView.loadUrl(mHomeUrl);
+        mWebView.loadUrl(getIntent().getData().toString());
     }
 
 

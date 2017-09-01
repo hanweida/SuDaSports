@@ -147,6 +147,41 @@ class MyNotifiScreen extends React.Component {
     }
 }
 
+const SimpleTabNavigator = TabNavigator(
+    {
+        首页: {
+            screen: Home,
+        },
+        Notifications: {
+            screen: MyNotificationsScreen,
+        },
+        Notifica: {
+            screen: MyNotifiScreen,
+        },
+    },
+    {
+        tabBarPosition: 'bottom',
+        swipeEnabled: false, // 禁止左右滑动
+        tabBarOptions: {
+            activeTintColor: '#FF0000',
+            inactiveTintColor: '#2B2B2B', // 文字和图片默认颜色
+            showIcon: true,
+            indicatorStyle: {height: 0},
+            style: {
+                backgroundColor: '#FFFFFF', // TabBar 背景色
+                height:0
+            },
+            labelStyle: {
+                fontSize: 11, // 文字大小
+            },
+            tabStyle:{
+                height:70
+            }
+        },
+    }
+);
+
+
 const styles = StyleSheet.create({
     icon: {
         width: 20,
@@ -221,39 +256,5 @@ const styles = StyleSheet.create({
 
     }
 });
-
-const SimpleTabNavigator = TabNavigator(
-    {
-        首页: {
-            screen: Home,
-        },
-        Notifications: {
-            screen: MyNotificationsScreen,
-        },
-        Notifica: {
-            screen: MyNotifiScreen,
-        },
-    },
-    {
-        tabBarPosition: 'bottom',
-        swipeEnabled: false, // 禁止左右滑动
-        tabBarOptions: {
-            activeTintColor: '#FF0000',
-            inactiveTintColor: '#2B2B2B', // 文字和图片默认颜色
-            showIcon: true,
-            indicatorStyle: {height: 0},
-            style: {
-                backgroundColor: '#FFFFFF', // TabBar 背景色
-                height:0
-            },
-            labelStyle: {
-                fontSize: 11, // 文字大小
-            },
-            tabStyle:{
-                height:70
-            }
-        },
-    }
-);
 
 export default SimpleTabNavigator;

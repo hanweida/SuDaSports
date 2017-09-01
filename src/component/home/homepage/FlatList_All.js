@@ -7,7 +7,9 @@ import {
     Text,
     View,
     Image,
-    Alert
+    Alert,
+    TouchableOpacity,
+    NativeModules
 } from 'react-native';
 
 export default class FlatList_All extends React.PureComponent{
@@ -113,43 +115,89 @@ export default class FlatList_All extends React.PureComponent{
         };
     }
 
+
+    onTabPress(item,index){
+        NativeModules.WebviewRNModule.show(item.url);
+    }
+
     renderItem({item, index}) {
+        // return (
+        //     <View style={styles.listItem}>
+        //             <View style={styles.container}>
+        //                 <View style={[styles.flexDirections]}>
+        //                     <View style={{flexDirection:'column',justifyContent:'space-between',marginRight:10}}>
+        //                         <View >
+        //                             <Image source={{uri:item.firstImageUrl}} style={styles.image} resizeMode='stretch'></Image>
+        //                         </View >
+        //                         <View >
+        //                             <Image source={{uri:item.lastImageUrl}} style={styles.image} resizeMode='stretch'></Image>
+        //                         </View>
+        //                     </View>
+        //                     <View style={{flexDirection:'column',justifyContent:'space-between'}}>
+        //                         <View>
+        //                             <Text style={styles.text}>{item.first_name}</Text>
+        //                         </View>
+        //                         <View>
+        //                             <Text style={styles.text}>{item.last_name}</Text>
+        //                         </View>
+        //                     </View>
+        //                 </View>
+        //                 <View style={styles.time}>
+        //                     <View style={{flexDirection:'row',alignItems:'center'}}>
+        //                         <View style={{marginRight:5}}>
+        //                             <Image source={require('../../../img/zhibo_icon/直播icon.png')} ></Image>
+        //                         </View>
+        //                         <View >
+        //                             <Text style={[styles.text]}>视频直播</Text>
+        //                         </View>
+        //                     </View>
+        //                     <View style={styles.text}>
+        //                         <Text >{item.time}</Text>
+        //                     </View>
+        //                 </View>
+        //             </View>
+        //     </View>
+        // );
+
         return (
-            <View style={styles.listItem}>
-                <View style={styles.container}>
-                    <View style={[styles.flexDirections]}>
-                        <View style={{flexDirection:'column',justifyContent:'space-between',marginRight:10}}>
-                            <View >
-                                <Image source={{uri:item.firstImageUrl}} style={styles.image} resizeMode='stretch'></Image>
-                            </View >
-                            <View >
-                                <Image source={{uri:item.lastImageUrl}} style={styles.image} resizeMode='stretch'></Image>
+            <TouchableOpacity style={styles.listItem}
+                              onPress={this.onTabPress.bind(this,item,index)}
+            >
+                    <View style={styles.container}>
+                        <View style={[styles.flexDirections]}>
+                            <View style={{flexDirection:'column',justifyContent:'space-between',marginRight:10}}>
+                                <View >
+                                    <Image source={{uri:item.firstImageUrl}} style={styles.image} resizeMode='stretch'></Image>
+                                </View >
+                                <View >
+                                    <Image source={{uri:item.lastImageUrl}} style={styles.image} resizeMode='stretch'></Image>
+                                </View>
+                            </View>
+                            <View style={{flexDirection:'column',justifyContent:'space-between'}}>
+                                <View>
+                                    <Text style={styles.text}>{item.first_name}</Text>
+                                </View>
+                                <View>
+                                    <Text style={styles.text}>{item.last_name}</Text>
+                                </View>
                             </View>
                         </View>
-                        <View style={{flexDirection:'column',justifyContent:'space-between'}}>
-                            <View>
-                                <Text style={styles.text}>{item.first_name}</Text>
+                        <View style={styles.time}>
+                            <View style={{flexDirection:'row',alignItems:'center'}}>
+                                <View style={{marginRight:5}}>
+                                    <Image source={require('../../../img/zhibo_icon/直播icon.png')} ></Image>
+                                </View>
+                                <View >
+                                    <Text style={[styles.text]}>视频直播</Text>
+                                </View>
                             </View>
-                            <View>
-                                <Text style={styles.text}>{item.last_name}</Text>
-                            </View>
-                        </View>
-                    </View>
-                    <View style={styles.time}>
-                        <View style={{flexDirection:'row',alignItems:'center'}}>
-                            <View style={{marginRight:5}}>
-                                <Image source={require('../../../img/zhibo_icon/直播icon.png')} ></Image>
-                            </View>
-                            <View >
-                                <Text style={[styles.text]}>视频直播</Text>
+                            <View style={styles.text}>
+                                <Text >{item.time}</Text>
                             </View>
                         </View>
-                        <View style={styles.text}>
-                            <Text >{item.time}</Text>
-                        </View>
-                    </View>
                 </View>
-            </View>
+            </TouchableOpacity>
+
         );
     }
 
@@ -173,7 +221,7 @@ export default class FlatList_All extends React.PureComponent{
                 <FlatList
                     keyExtractor={item => item.id}
                     data={this.state.listData}
-                    renderItem={this.renderItem}
+                    renderItem={this.renderItem.bind(this)}
                     onEndReached={()=>{
                         if(this.state.myindex<2){
                       // 到达底部，加载更多列表项

@@ -19,6 +19,7 @@ import {
 import SegmentedControlTab from 'react-native-segmented-control-tab'
 import ScrollableTabView  from 'react-native-scrollable-tab-view';
 import Zhibo_Tab from '../hometab/Zhibo_Tab'
+import FlatList_All from '../homepage/FlatList_All'
 
 export default class Home extends Component {
     constructor(props) {
@@ -26,7 +27,7 @@ export default class Home extends Component {
         this.state = {
             selectedIndex: 0,
             selectedIndices: [0],
-            customStyleIndex: 0,
+            customStyleIndex: 1,
         }
     }
 
@@ -62,6 +63,15 @@ export default class Home extends Component {
         });
     }
 
+    componentDidMount() {
+        this.handleCustomIndexSelect(0);
+    }
+
+    componentWillMount() {
+        this.setState({
+            customStyleIndex: 1,
+        });
+    }
     render() {
         return (
             <View style={styles.container}>
@@ -81,7 +91,7 @@ export default class Home extends Component {
                 <View style={styles.container}>
                     {this.state.customStyleIndex === 0 &&
                         <View style={styles.container}>
-                            <Zhibo_Tab></Zhibo_Tab>
+                            <FlatList_All></FlatList_All>
                         </View>
                     }
                     {this.state.customStyleIndex === 1 &&
