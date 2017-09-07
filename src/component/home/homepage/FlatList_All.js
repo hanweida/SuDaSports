@@ -44,7 +44,7 @@ export default class FlatList_All extends React.PureComponent{
                         var pattern = new RegExp('<a (data-action)[^>]*>(.*?)(<\/a>)', 'g');
                         var matchArr = responseTexts.match(pattern);
                         for(var i = 0; i < matchArr.length; i++){
-                            console.info(JSON.stringify(this.getArrayList(matchArr[i])));
+                            console.info("网络获取数据 匹配每场比赛："+JSON.stringify(this.getArrayList(matchArr[i])));
                             list.push(this.getArrayList(matchArr[i]));
                         }
                     }).then(()=>{
@@ -62,13 +62,20 @@ export default class FlatList_All extends React.PureComponent{
 
     /** 解析每个比赛列表 如：*/
     getArrayList(content){
+        console.log("每场比赛content："+content);
         var obj = {};
         var pattern = new RegExp('((https|http|ftp|rtsp|mms)?:\/\/)[\\S]*(")','g');
         var pattern_name = new RegExp('(<span>)(.*?)(?=<\/span>)','g');
         var matchArr = content.match(pattern);
+        console.log("每场比赛URL数组："+matchArr);
+        console.log("每场比赛URL数组长度："+matchArr.length);
         obj.url= matchArr[0].substr(0, matchArr[0].length-2);
-        obj.firstImageUrl = matchArr[1].substr(0, matchArr[1].length-2);
-        obj.lastImageUrl = matchArr[2].substr(0, matchArr[2].length-2);
+        if(matchArr.length > 1){
+            obj.firstImageUrl = matchArr[1].substr(0, matchArr[1].length-2);
+        }
+        if(matchArr.length > 2){
+            obj.lastImageUrl = matchArr[2].substr(0, matchArr[2].length-2);
+        }
 
         var matchArr_name = content.match(pattern_name);
         obj.first_name= matchArr_name[0].replace('<span>', '');
