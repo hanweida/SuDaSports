@@ -26,11 +26,11 @@ export default class Zhibo_Tab extends Component{
     }
 
     componentWillMount() {
-        if (Platform.OS === 'android') {
-            //BackAndroid.addEventListener('hardwareBackPress', this.onBackAndroid);
-
-            // BackAndroid.addEventListener('hardwareBackPress', this.onBackAndroid);
-        }
+        // if (Platform.OS === 'android') {
+        //     //BackAndroid.addEventListener('hardwareBackPress', this.onBackAndroid);
+        //
+        //     // BackAndroid.addEventListener('hardwareBackPress', this.onBackAndroid);
+        // }
     }
     componentWillUnmount() {
         // if (Platform.OS === 'android') {
@@ -40,19 +40,19 @@ export default class Zhibo_Tab extends Component{
         //     });
         // }
     }
-    onBackAndroid = () => {
-        ToastAndroid.show('This is a toast with short duration', ToastAndroid.SHORT);
-        this.webView.goBack();
-        true;
-        // const { navigator } = this.props;
-        // const routers = navigator.getCurrentRoutes();
-        // console.log('当前路由长度：'+routers.length);
-        // if (routers.length > 1) {
-        // navigator.pop();
-        // return true;//接管默认行为
-        // }
-        // return false;//默认行为
-    };
+    // onBackAndroid = () => {
+    //     ToastAndroid.show('This is a toast with short duration', ToastAndroid.SHORT);
+    //     this.webView.goBack();
+    //     true;
+    //     // const { navigator } = this.props;
+    //     // const routers = navigator.getCurrentRoutes();
+    //     // console.log('当前路由长度：'+routers.length);
+    //     // if (routers.length > 1) {
+    //     // navigator.pop();
+    //     // return true;//接管默认行为
+    //     // }
+    //     // return false;//默认行为
+    // };
 
     onNavigationStateChange = (navState) => {
         // this.setState({
@@ -79,17 +79,18 @@ export default class Zhibo_Tab extends Component{
         }
 
                 onScroll={
-          (position) => {
-            console.log('滑动时的位置：' + position);
-          }
+                    (position) => {
+                        console.log('滑动时的位置：' + position);
+                }
         }
                 locked={false}
                 initialPage={0}
+                page={1}
                 prerenderingSiblingsNumber={1}
             >
 
                 <View tabLabel="1" style={styles.center}>
-                    <Text>dddddd</Text>
+                    <FlatList_All></FlatList_All>
                 </View>
                 <View tabLabel="2" style={styles.center}>
                     <View>

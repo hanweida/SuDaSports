@@ -44,7 +44,7 @@ export default class FlatList_All extends React.PureComponent{
                         var pattern = new RegExp('<a (data-action)[^>]*>(.*?)(<\/a>)', 'g');
                         var matchArr = responseTexts.match(pattern);
                         for(var i = 0; i < matchArr.length; i++){
-                            console.info("网络获取数据 匹配每场比赛："+JSON.stringify(this.getArrayList(matchArr[i])));
+                            //console.info("网络获取数据 匹配每场比赛："+JSON.stringify(this.getArrayList(matchArr[i])));
                             list.push(this.getArrayList(matchArr[i]));
                         }
                     }).then(()=>{
@@ -62,13 +62,13 @@ export default class FlatList_All extends React.PureComponent{
 
     /** 解析每个比赛列表 如：*/
     getArrayList(content){
-        console.log("每场比赛content："+content);
+        //console.log("每场比赛content："+content);
         var obj = {};
         var pattern = new RegExp('((https|http|ftp|rtsp|mms)?:\/\/)[\\S]*(")','g');
         var pattern_name = new RegExp('(<span>)(.*?)(?=<\/span>)','g');
         var matchArr = content.match(pattern);
-        console.log("每场比赛URL数组："+matchArr);
-        console.log("每场比赛URL数组长度："+matchArr.length);
+        //console.log("每场比赛URL数组："+matchArr);
+        //console.log("每场比赛URL数组长度："+matchArr.length);
         obj.url= matchArr[0].substr(0, matchArr[0].length-2);
         if(matchArr.length > 1){
             obj.firstImageUrl = matchArr[1].substr(0, matchArr[1].length-2);
@@ -127,7 +127,7 @@ export default class FlatList_All extends React.PureComponent{
         NativeModules.WebviewRNModule.show(item.url);
     }
 
-    renderItem({item, index}) {
+    renderItem = ({item, index}) => {
         // return (
         //     <View style={styles.listItem}>
         //             <View style={styles.container}>
@@ -198,7 +198,7 @@ export default class FlatList_All extends React.PureComponent{
                                     <Text style={[styles.text]}>视频直播</Text>
                                 </View>
                             </View>
-                            <View style={styles.text}>
+                            <View >
                                 <Text >{item.time}</Text>
                             </View>
                         </View>
@@ -218,7 +218,7 @@ export default class FlatList_All extends React.PureComponent{
             </View>
         );
     }
-
+    _keyExtractor = (item, index) => 'Manufacturer' + index;
     render() {
         if (!this.state.loaded) {
             return this.renderLoadingView();
@@ -226,9 +226,9 @@ export default class FlatList_All extends React.PureComponent{
         return (
             <View style={styles.view}>
                 <FlatList
-                    keyExtractor={item => item.id}
+                    keyExtractor={this._keyExtractor}
                     data={this.state.listData}
-                    renderItem={this.renderItem.bind(this)}
+                    renderItem={this.renderItem}
                     onEndReached={()=>{
                         if(this.state.myindex<2){
                       // 到达底部，加载更多列表项
@@ -236,7 +236,7 @@ export default class FlatList_All extends React.PureComponent{
                         listData: this.state.listData.concat(this.getData()),
                       });
                       }
-                      console.log("onEndReached=" + this.state.listData.length);
+                      //console.log("onEndReached=" + this.state.listData.length);
                 }}
                     refreshing={false}
                     onRefresh={() => {
@@ -244,7 +244,7 @@ export default class FlatList_All extends React.PureComponent{
                             listData: this.getData(),
                           });
 
-                     console.log("onRefresh=" + this.state.listData.length);
+                     //console.log("onRefresh=" + this.state.listData.length);
                     }}
                     debug={false}
                     numColumns={1}
@@ -255,9 +255,8 @@ export default class FlatList_All extends React.PureComponent{
     }
 
     footerView() {
-
         return <View style={{flex:1,height:70,justifyContent:'center',alignItems:'center'}}>
-            <Text>上啦加载更多</Text>
+            <Text>到底啦</Text>
         </View>
 
     }

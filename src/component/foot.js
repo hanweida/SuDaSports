@@ -20,19 +20,19 @@ export default class Footer extends Component{
     }
 
   componentWillMount() {
-    if (Platform.OS === 'android') {
-        BackAndroid.addEventListener('hardwareBackPress', this.onBackAndroid);
-
-      // BackAndroid.addEventListener('hardwareBackPress', this.onBackAndroid);
-    }
+    // if (Platform.OS === 'android') {
+    //     BackAndroid.addEventListener('hardwareBackPress', this.onBackAndroid);
+    //
+    //   // BackAndroid.addEventListener('hardwareBackPress', this.onBackAndroid);
+    // }
   }
   componentWillUnmount() {
-    if (Platform.OS === 'android') {
-     BackAndroid.addEventListener('hardwareBackPress', function() {
-         this.onBackAndroid;
-            return true;
-        });
-    }
+    // if (Platform.OS === 'android') {
+    //  BackAndroid.addEventListener('hardwareBackPress', function() {
+    //      this.onBackAndroid;
+    //         return true;
+    //     });
+    // }
   }
   onBackAndroid = () => {
     ToastAndroid.show('This is a toast with short duration', ToastAndroid.SHORT);
