@@ -19,6 +19,7 @@ import {
 import SegmentedControlTab from 'react-native-segmented-control-tab'
 import ScrollableTabView  from 'react-native-scrollable-tab-view';
 import Zhibo_Tab from '../hometab/Zhibo_Tabs'
+import News_Tab from '../hometab/News_Tabs'
 import FlatList_All from '../homepage/FlatList_All'
 
 export default class Home extends Component {
@@ -95,7 +96,10 @@ export default class Home extends Component {
                         </View>
                     }
                     {this.state.customStyleIndex === 1 &&
-                    <View style={styles.tabContent}><Text>222</Text></View>}
+                        <View style={styles.container}>
+                            <News_Tab></News_Tab>
+                        </View>
+                    }
                     {this.state.customStyleIndex === 2 &&
                     <View style={styles.tabContent}><Text>333</Text></View>}
                 </View>
