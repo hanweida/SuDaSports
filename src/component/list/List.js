@@ -29,11 +29,11 @@ export default class List extends Component{
     }
 
     componentDidMount() {
-      var responses = fetch('http://s.tmiaoo.com/ipad.html')
+      var responses = fetch('http://www.kuwantiyu.com')
         .then((response) => response.text())
         //获得返回的html 文本
         .then((responseText) => {
-         //console.log(responseText);
+         console.log(responseText);
          //this.jiexi(responseText);
          return responseText;
       })
@@ -49,7 +49,7 @@ export default class List extends Component{
     jiexi=(successMessage)=>{
         //console.log(successMessage);
         var patten = new RegExp('<script[^>]*>(.*?)<\/script>', 'g');
-var matchArr = successMessage.match(patten);
+        var matchArr = successMessage.match(patten);
 
 
         var str = successMessage.match('<script (\S*)</script>');

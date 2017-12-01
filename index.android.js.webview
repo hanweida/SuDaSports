@@ -14,27 +14,27 @@ import {
   NativeModules,
    processColor,
    PropTypes ,
-   WebView
+   WebView,
+    Dimensions
 } from 'react-native';
 
 import App from './App'
 
 var WEBVIEW_REF = 'webview';
 var DEFAULT_URL = 'https://m.facebook.com';
+
+const {width, height} = Dimensions.get('window');
+
+const url = "https://www.baidu.com";
+
 export default class SuDaSports extends Component {
 
   render() {
     return (
-         <WebView
-            ref={WEBVIEW_REF}
-          automaticallyAdjustContentInsets={false}
-          style={styles.webView}
-          source={{uri: 'http://nba.tmiaoo.com'}}
-          javaScriptEnabled={true}
-          domStorageEnabled={true}
-          decelerationRate="normal"
-          >
-          </WebView>
+        <WebView
+            source={{uri:'http://www.baidu.com'}}
+            style={{width:'100%',height:'100%'}}
+        />
     );
   }
 }

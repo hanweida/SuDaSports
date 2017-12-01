@@ -14,11 +14,11 @@ import {
 
 /** 全部直播页面*/
 export default class FlatList_All extends React.PureComponent{
-    // componentWillMount() {
-    //     this.state = {
-    //         listData: this.getData(),
-    //     };
-    // }
+    componentWillMount() {
+        this.state = {
+            listData: this.getData(),
+        };
+    }
 
     getData2(){
         var list = [];
@@ -27,109 +27,71 @@ export default class FlatList_All extends React.PureComponent{
         return list;
     }
     /** 网络获取数据，获取成功后，通过设置loaded 为true，表示加载成功*/
-    // getData(){
-    //     var list = [];
-    //     var responses = fetch('http://www.kuwantiyu.com/')
-    //         .then((response) => response.text())
-    //         //获得返回的html 文本
-    //         .then((responseTexts) => {
-    //             console.log(responseTexts);
-    //             var pattern = new RegExp('<script src=\"(.*?)\">(.*?)<\/script>', 'i');
-    //             var matchArr = responseTexts.match(pattern);
-    //             var needStr = matchArr[1];
-    //             return needStr;
-    //         })
-    //         .then((needStr)=>{
-    //             var responses = fetch('http://a.tmiaoo.com/'+needStr)
-    //                 .then((response)=>response.text())
-    //                 .then((responseTexts) => {
-    //                     var pattern = new RegExp('<a (data-action)[^>]*>(.*?)(<\/a>)', 'g');
-    //                     var matchArr = responseTexts.match(pattern);
-    //                     for(var i = 0; i < matchArr.length; i++){
-    //                         //console.info("网络获取数据 匹配每场比赛："+JSON.stringify(this.getArrayList(matchArr[i])));
-    //                         list.push(this.getArrayList(matchArr[i]));
-    //                     }
-    //                 }).then(()=>{
-    //                     this.setState({
-    //                         loaded:true,
-    //                         listData:list
-    //                     });
-    //                     return list;
-    //                 })
-    //         })
-    //         .catch((error) => {
-    //             //console.error(error);
-    //         });
-    // }
-
-
     getData(){
         var list = [];
-        var responses = fetch('http://120.78.150.194:8080/video/gamelist.biz')
-                .then((response) => response.json())
-                //获得返回的json
-                .then((responseJson) => {
-                    console.log(JSON.stringify(responseJson));
-                    for(var i=0,l=responseJson.length;i<l;i++){
-                        console.log(JSON.stringify(responseJson[i]));
-                        list.push(this.getArrayList(responseJson[i]));
-                    }
-                })
-                .then(()=>{
-                    this.setState({
-                        loaded:true,
-                        listData:list
-                    });
-                    console.log("Sucess");
-                    return list;
-                })
-                .catch((error) => {
-                    //console.error(error);
-                });
+        var responses = fetch('http://www.kuwantiyu.com/')
+            .then((response) => response.text())
+            //获得返回的html 文本
+            .then((responseTexts) => {
+                console.log(responseTexts);
+                var pattern = new RegExp('<script src=\"(.*?)\">(.*?)<\/script>', 'i');
+                var matchArr = responseTexts.match(pattern);
+                var needStr = matchArr[1];
+                return needStr;
+            })
+            .then((needStr)=>{
+                var responses = fetch('http://a.tmiaoo.com/'+needStr)
+                    .then((response)=>response.text())
+                    .then((responseTexts) => {
+                        var pattern = new RegExp('<a (data-action)[^>]*>(.*?)(<\/a>)', 'g');
+                        var matchArr = responseTexts.match(pattern);
+                        for(var i = 0; i < matchArr.length; i++){
+                            //console.info("网络获取数据 匹配每场比赛："+JSON.stringify(this.getArrayList(matchArr[i])));
+                            list.push(this.getArrayList(matchArr[i]));
+                        }
+                    }).then(()=>{
+                        this.setState({
+                            loaded:true,
+                            listData:list
+                        });
+                        return list;
+                    })
+            })
+            .catch((error) => {
+                //console.error(error);
+            });
     }
 
     /** 解析每个比赛列表 如：*/
-    getArrayList(matchJson){
+    getArrayList(content){
         //console.log("每场比赛content："+content);
         var obj = {};
-        obj.url= matchJson.match_url;
-        obj.firstImageUrl = matchJson.home_logo_url;
-        obj.lastImageUrl = matchJson.guest_logo_url;
-        obj.first_name= matchJson.home_team;
-        obj.time= matchJson.match_time;
-        obj.last_name = matchJson.guest_team;
+        var pattern = new RegExp('((https|http|ftp|rtsp|mms)?:\/\/)[\\S]*(")','g');
+        var pattern_name = new RegExp('(<span>)(.*?)(?=<\/span>)','g');
+        var matchArr = content.match(pattern);
+        //console.log("每场比赛URL数组："+matchArr);
+        //console.log("每场比赛URL数组长度："+matchArr.length);
+        obj.url= matchArr[0].substr(0, matchArr[0].length-2);
+        if(matchArr.length > 1){
+            obj.firstImageUrl = matchArr[1].substr(0, matchArr[1].length-2);
+        }
+        if(matchArr.length > 2){
+            obj.lastImageUrl = matchArr[2].substr(0, matchArr[2].length-2);
+        }
+
+        var matchArr_name = content.match(pattern_name);
+        obj.first_name= matchArr_name[0].replace('<span>', '');
+        obj.first_name = this.fontFilter(obj.first_name);
+        obj.splitstr= matchArr_name[1].replace('<span>', '');
+        obj.splitstr = this.fontFilter(obj.splitstr);
+        obj.time= matchArr_name[2].replace('<span>', '');
+        obj.time = this.fontFilter(obj.time);
+        obj.time = this.timeInvert(obj.time);
+        obj.last_name= matchArr_name[3].replace('<span>', '');
+        obj.last_name = this.fontFilter(obj.last_name);
+
         return obj;
     }
-
-    /** 解析每个比赛列表 如：*/
-    // getArrayList(content){
-    //     //console.log("每场比赛content："+content);
-    //     var obj = {};
-    //     var pattern = new RegExp('((https|http|ftp|rtsp|mms)?:\/\/)[\\S]*(")','g');
-    //     var pattern_name = new RegExp('(<span>)(.*?)(?=<\/span>)','g');
-    //     var matchArr = content.match(pattern);
-    //     //console.log("每场比赛URL数组："+matchArr);
-    //     //console.log("每场比赛URL数组长度："+matchArr.length);
-    //     obj.url= matchArr[0].substr(0, matchArr[0].length-2);
-    //     if(matchArr.length > 1){
-    //         obj.firstImageUrl = matchArr[1].substr(0, matchArr[1].length-2);
-    //     }
-    //     if(matchArr.length > 2){
-    //         obj.lastImageUrl = matchArr[2].substr(0, matchArr[2].length-2);
-    //     }
-    //
-    //     var matchArr_name = content.match(pattern_name);
-    //     obj.first_name= matchArr_name[0].replace('<span>', '');
-    //     obj.first_name = this.fontFilter(obj.first_name);
-    //     obj.splitstr= matchArr_name[1].replace('<span>', '');
-    //     obj.splitstr = this.fontFilter(obj.splitstr);
-    //     obj.time= matchArr_name[2].replace('<span>', '');
-    //     obj.time = this.fontFilter(obj.time);
-    //     obj.time = this.timeInvert(obj.time);
-    //     obj.last_name= matchArr_name[3].replace('<span>', '');
-    //     obj.last_name = this.fontFilter(obj.last_name);
-    //     return obj;
-    // }
 
     timeInvert(value){
         var i = 0;
@@ -162,8 +124,9 @@ export default class FlatList_All extends React.PureComponent{
         };
     }
 
+
     onTabPress(item,index){
-        NativeModules.WebviewRNModule.show("http://120.78.150.194:8080/video/geturl.biz?url="+item.url);
+        NativeModules.WebviewRNModule.show(item.url);
     }
 
     renderItem = ({item, index}) => {
@@ -270,15 +233,13 @@ export default class FlatList_All extends React.PureComponent{
                     renderItem={this.renderItem}
                     onEndReached={()=>{
                         if(this.state.myindex<2){
-                          // 到达底部，加载更多列表项
-                          if(null != this.getData()){
-                              this.setState({
-                                listData: this.state.listData.concat(this.getData()),
-                              });
-                          }
-                        }
+                      // 到达底部，加载更多列表项
+                      this.setState({
+                        listData: this.state.listData.concat(this.getData()),
+                      });
+                      }
                       //console.log("onEndReached=" + this.state.listData.length);
-                    }}
+                }}
                     refreshing={false}
                     onRefresh={() => {
                             this.setState({

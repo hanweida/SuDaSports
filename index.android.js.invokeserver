@@ -19,7 +19,9 @@ import RCTWebView from './src/component/nativemodules/CustomWebView'
 
 export default class SuDaSports extends Component {
 _click(){
-     NativeModules.WebviewRNModule.show('正在打开视频');
+    NativeModules.WebviewRNModule.show(
+        "http://192.168.100.104:8080/video/geturl.biz"
+        );
   }
 
   render() {
@@ -45,4 +47,5 @@ const styles = StyleSheet.create({
         flex: 1
     }
 });
+
 AppRegistry.registerComponent('SuDaSports', () => SuDaSports);

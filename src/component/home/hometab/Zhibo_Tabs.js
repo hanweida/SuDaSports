@@ -18,6 +18,7 @@ import Zhibo_All from './Zhibo_All'
 import FlatList_All from '../homepage/FlatList_All'
 import SegmentedControlTab from 'react-native-segmented-control-tab'
 
+/** 直播Tab选项*/
 export default class Zhibo_Tabs extends Component{
     constructor(props) {
         super(props)

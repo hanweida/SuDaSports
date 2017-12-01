@@ -3,7 +3,7 @@ import {
     StyleSheet,
     StatusBar,
 } from 'react-native'
-
+ /** app顶部样式*/
  export default class Header extends Component{
     constructor(props) {  
         super(props);  

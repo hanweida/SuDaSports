@@ -38,6 +38,7 @@ public class WebviewActivity  extends AppCompatActivity {
      * 作为一个浏览器的示例展示出来，采用android+web的模式
      */
     private X5WebView mWebView;
+    private X5WebView mWebView2;
     private ViewGroup mViewParent;
     private ImageButton mBack;
     private ImageButton mForward;
@@ -70,6 +71,8 @@ public class WebviewActivity  extends AppCompatActivity {
         setContentView(R.layout.activity_my);
         mWebView = (X5WebView) findViewById(R.id.webView1);
         mWebView.loadUrl(getIntent().getData().toString());
+        //mWebView2 = (X5WebView) findViewById(R.id.webView2);
+        //mWebView2.loadUrl(getIntent().getData().toString());
     }
 
 
@@ -88,6 +91,7 @@ public class WebviewActivity  extends AppCompatActivity {
         if (intent == null || mWebView == null || intent.getData() == null)
             return;
         mWebView.loadUrl(intent.getData().toString());
+        //mWebView2.loadUrl(intent.getData().toString());
     }
 
     @Override
