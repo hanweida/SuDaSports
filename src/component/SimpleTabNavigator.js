@@ -103,6 +103,7 @@ import {
 
 import ZhiBoScreen from  './home/homepage/ZhiBoScreen'
 import Home from  './home/homepage/Home'
+import TeamSortPage from  './teamsort/page/TeamSortPage'
 
 
 class MyNotificationsScreen extends React.Component {
@@ -152,8 +153,8 @@ const SimpleTabNavigator = TabNavigator(
         首页: {
             screen: Home,
         },
-        Notifications: {
-            screen: MyNotificationsScreen,
+        TeamSortPage: {
+            screen: TeamSortPage,
         },
         Notifica: {
             screen: MyNotifiScreen,
@@ -169,7 +170,7 @@ const SimpleTabNavigator = TabNavigator(
             indicatorStyle: {height: 0},
             style: {
                 backgroundColor: '#FFFFFF', // TabBar 背景色
-                height:0
+                height:40
             },
             labelStyle: {
                 fontSize: 11, // 文字大小

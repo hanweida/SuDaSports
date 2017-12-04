@@ -13,7 +13,8 @@ import {
     Text,
     NativeModules,
     processColor,
-    WebView
+    WebView,
+    Image
 } from 'react-native';
 
 import SegmentedControlTab from 'react-native-segmented-control-tab'
@@ -31,6 +32,16 @@ export default class Home extends Component {
             customStyleIndex: 1,
         }
     }
+
+    static navigationOptions = {
+        tabBarLabel: 'Notifications',
+        tabBarIcon: ({tintColor}) => (
+            <Image
+                source={require('../../../img/tab_icon_home_sel@2x.png')}
+                style={[styles.icon, {tintColor: tintColor}]}
+            />
+        ),
+    };
 
     handleSingleIndexSelect = (index) => {
         this.setState({
