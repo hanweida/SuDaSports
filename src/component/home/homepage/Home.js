@@ -34,7 +34,7 @@ export default class Home extends Component {
     }
 
     static navigationOptions = {
-        tabBarLabel: 'Notifications',
+        tabBarLabel: '首页',
         tabBarIcon: ({tintColor}) => (
             <Image
                 source={require('../../../img/tab_icon_home_sel@2x.png')}

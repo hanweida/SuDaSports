@@ -170,7 +170,7 @@ const SimpleTabNavigator = TabNavigator(
             indicatorStyle: {height: 0},
             style: {
                 backgroundColor: '#FFFFFF', // TabBar 背景色
-                height:40
+                height:62
             },
             labelStyle: {
                 fontSize: 11, // 文字大小

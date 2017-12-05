@@ -69,9 +69,9 @@ export default class FlatList_All extends React.PureComponent{
                 .then((response) => response.json())
                 //获得返回的json
                 .then((responseJson) => {
-                    console.log(JSON.stringify(responseJson));
+                    //console.log(JSON.stringify(responseJson));
                     for(var i=0,l=responseJson.length;i<l;i++){
-                        console.log(JSON.stringify(responseJson[i]));
+                        //console.log(JSON.stringify(responseJson[i]));
                         list.push(this.getArrayList(responseJson[i]));
                     }
                 })
@@ -80,7 +80,7 @@ export default class FlatList_All extends React.PureComponent{
                         loaded:true,
                         listData:list
                     });
-                    console.log("Sucess");
+                    //console.log(JSON.stringify(this.state.listData));
                     return list;
                 })
                 .catch((error) => {
@@ -257,6 +257,8 @@ export default class FlatList_All extends React.PureComponent{
             </View>
         );
     }
+
+  
     _keyExtractor = (item, index) => 'Manufacturer' + index;
     render() {
         if (!this.state.loaded) {
