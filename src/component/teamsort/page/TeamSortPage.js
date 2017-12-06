@@ -37,13 +37,6 @@ export default class TeamSortPage extends Component{
         this.getData();
     }
 
-    replaceAll(str)
-    {
-        if(str!=null)
-            str = str.replace(/word/g,"Excel")
-        return str;
-    }
-
     getData(){
         let responses = fetch(TencentApi.api.TeamsRankUrl)
             .then((res)=>res.text())
@@ -58,7 +51,7 @@ export default class TeamSortPage extends Component{
                 });
             })
             .then(()=>{
-                //console.log("ListData："+JSON.stringify(this.state.listData));
+                console.log("ListData："+JSON.stringify(this.state.listData));
             });
     }
 
@@ -73,30 +66,55 @@ export default class TeamSortPage extends Component{
         );
     };
 
-    _renderSectionHeader = ({ section }) => (
-        <View style={{ flex: 1, height: 25 }}>
-            <Text >{section.title}</Text>
-        </View>
-    );
-
     _renderItem = ({item, index}) => {
         var txt = '  ' + item[0].name;
         var txt2 = '  ' + item[1];
-        return <Text
-            style={{ height: 60, textAlignVertical: 'center', backgroundColor: "#ffffff", color: '#5C5C5C', fontSize: 15 }}>{txt}{txt2}</Text>
+        return (
+            <View style={styles.compView}>
+                <View style={{flex:4,flexDirection:'row',marginLeft:5}}>
+                    <Image source={{uri:item[0].badge}} style={[styles.image,{alignSelf: 'center'}]} resizeMode='contain'/>
+                    <Text
+                        style={{textAlignVertical: 'center', fontSize: 15 }}>{txt}
+                    </Text>
+                </View>
+                <Text style={[styles.dataText]}>{item[1]}</Text>
+                <Text style={styles.dataText}>{item[2]}</Text>
+                <Text style={styles.dataText}>{item[3]}</Text>
+                <Text style={styles.dataText}>{item[4]}</Text>
+            </View>
+        )
     }
 
     _sectionComp = ({section, index}) => {
         console.log("section：" +section.title);
         var txt = section.title;
-        return <Text
-            style={{ height: 50, textAlign: 'center', textAlignVertical: 'center', backgroundColor: '#9CEBBC', color: 'white', fontSize: 30 }}>{txt}</Text>
+        return (
+            <View style={[styles.compView,{backgroundColor:"#F66A85"}]}>
+                <Text
+                    style={{ marginLeft:5,flex:4,textAlign: 'left', textAlignVertical: 'center', fontSize: 18,fontWeight:'bold' }}>{txt}
+                </Text>
+                <Text
+                    style={{ flex:1,textAlign: 'center', textAlignVertical: 'center', fontSize: 16,fontWeight:'bold' }}>胜
+                </Text>
+                <Text
+                    style={{ flex:1,textAlign: 'center', textAlignVertical: 'center', fontSize: 16,fontWeight:'bold' }}>负
+                </Text>
+                <Text
+                    style={{ flex:1,textAlign: 'center', textAlignVertical: 'center', fontSize: 16,fontWeight:'bold' }}>胜率
+                </Text>
+                <Text
+                    style={{ flex:1,textAlign: 'center', textAlignVertical: 'center',  fontSize: 15,fontWeight:'bold' }}>胜场差
+                </Text>
+            </View>
+            )
+
     }
 
     _keyExtractor = (item, index) => 'Manufacturer' + index;
 
     _extraUniqueKey(item ,index){
-        return "index"+item.name;
+        console.log("index"+index+item[0].name);
+        return "index"+index+item[0].name;
     }
 
     render() {
@@ -112,8 +130,8 @@ export default class TeamSortPage extends Component{
         var sections = [
             { title: "A", data: [[{ name: "阿童木" },"20"], [{ name: "阿玛尼" },"20"], [{ name: "爱多多" },"20"]] },
             { title: "B", data: [[{ name: "表哥" },"20"], [{ name: "贝贝" },"20"], [{ name: "表弟" },"20"]] },
-            { title: "C", data: [[{ name: "阿童木" },"20"], [{ name: "阿童木" },"20"], [{ name: "阿童木" },"20"]]},
-            { title: "W", data: [[{ name: "阿童木" },"20"], [{ name: "阿童木" },"20"], [{ name: "阿童木" },"20"]]},
+            { title: "C", data: [[{ name: "阿" },"20"], [{ name: "童木" },"20"], [{ name: "阿童木" },"20"]]},
+            { title: "W", data: [[{ name: "木" },"20"], [{ name: "阿" },"20"], [{ name: "阿" },"20"]]},
         ];
         return (
             <View style={styles.container}>
@@ -126,11 +144,9 @@ export default class TeamSortPage extends Component{
                     renderSectionHeader={this._sectionComp}
                     renderItem={this._renderItem}
                     sections={this.state.listData.data}
-                    ItemSeparatorComponent={() => <View><Text></Text></View>}
-                    ListHeaderComponent={() => <View style={{ backgroundColor: '#25B960', alignItems: 'center', height: 30 }}><Text style={{ fontSize: 18, color: '#ffffff' }}>通讯录</Text></View>}
+                    ItemSeparatorComponent={() => <View style={{backgroundColor:"#E7E7E7",height:1}}></View>}
                 />
             </View>
-
         );
     }
 
@@ -139,6 +155,10 @@ export default class TeamSortPage extends Component{
 const styles = StyleSheet.create({
     container: {
         flex:1,
+    },
+    image: {
+        height: 30,
+        width: 35,
     },
     tab:{
         flexDirection:'row',
@@ -174,5 +194,15 @@ const styles = StyleSheet.create({
         borderTopWidth: 1,
         borderTopColor: '#888888',
         marginTop: 24
+    },
+    compView: {
+        flexDirection:'row',
+        height:40,
+    },
+    dataText:{
+        textAlign: 'center',
+        textAlignVertical: 'center',
+        fontSize: 15,
+        flex:1
     }
 })
