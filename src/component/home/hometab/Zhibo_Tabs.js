@@ -15,6 +15,7 @@ import {
 import FootCustom from './foot_custom';
 import ScrollableTabView  from 'react-native-scrollable-tab-view';
 import Zhibo_All from './Zhibo_All'
+import Zhibo_NBA from './Zhibo_NBA'
 import FlatList_All from '../homepage/FlatList_All'
 import SegmentedControlTab from 'react-native-segmented-control-tab'
 
@@ -63,12 +64,15 @@ export default class Zhibo_Tabs extends Component{
 
                 <View style={styles.container}>
                     {this.state.customStyleIndex === 0 &&
-                    <View style={styles.container}>
-                        <FlatList_All></FlatList_All>
-                    </View>
+                        <View style={styles.container}>
+                            <FlatList_All></FlatList_All>
+                        </View>
                     }
                     {this.state.customStyleIndex === 1 &&
-                    <View style={styles.tabContent}><Text>222</Text></View>}
+                        <View style={styles.container}>
+                            <Zhibo_NBA></Zhibo_NBA>
+                        </View>
+                    }
                 </View>
             </View>
         );
