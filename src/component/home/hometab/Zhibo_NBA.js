@@ -102,6 +102,8 @@ export default class Zhibo_NBA extends React.PureComponent{
         obj.guest_team_score = matchJson.guest_team_score;
         obj.match_quarter = matchJson.match_quarter;
         obj.match_quarterTime = matchJson.match_quarterTime;
+        obj.mid = matchJson.mid;
+        obj.match_desc = matchJson.match_desc;
         return obj;
     }
 
@@ -167,7 +169,7 @@ export default class Zhibo_NBA extends React.PureComponent{
     }
 
     onTabPress(item,index){
-        NativeModules.WebviewRNModule.show("http://120.78.150.194:8080/video/geturl.biz?url="+item.url);
+        NativeModules.WebviewRNModule.show("http://192.168.100.104:8080/video/getnbaurl.biz?url="+item.url+"&"+"mid="+item.mid);
     }
 
     renderItem = ({item, index}) => {
