@@ -86,6 +86,11 @@ android {
     compileSdkVersion 23
     buildToolsVersion "23.0.1"
 
+sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+        }
+    }
     defaultConfig {
         applicationId "com.sudasports"
         minSdkVersion 16
@@ -142,7 +147,7 @@ dependencies {
     compile "com.android.support:appcompat-v7:23.0.1"
     compile "com.facebook.react:react-native:+"  // From node_modules
     compile project(':react-native-video')
-    compile project(':react-native-x5')
+    compile files('src/main/libs/tbs_sdk_thirdapp_v3.1.0.1034_43100_sharewithdownload_obfs_20170301_182143.jar')
 }
 
 // Run this once to be able to run the application with BUCK
