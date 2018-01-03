@@ -3,7 +3,6 @@ package com.sudasports;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
-import im.shimo.react.x5.webview.RNX5WebViewPackage;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
@@ -24,11 +23,9 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
               new MainReactPackage(),
-              new RNX5WebViewPackage(),
               new ReactVideoPackage(),
               new AnExampleReactPackage(),
-              new WebviewPackage(),
-              new CirclePackage()
+              new WebviewPackage()
       );
     }
   };
