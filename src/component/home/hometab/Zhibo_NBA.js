@@ -65,7 +65,7 @@ export default class Zhibo_NBA extends React.PureComponent{
 
     getData(){
         var list = [];
-        var responses = fetch('http://192.168.100.104:8080/video/gameNBAlist.biz')
+        var responses = fetch('http://120.78.150.194:8080/video/gamenbalist.biz')
             .then((response) => response.json())
             //获得返回的json
             .then((responseJson) => {
