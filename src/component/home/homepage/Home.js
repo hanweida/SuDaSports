@@ -19,7 +19,9 @@ import {
 
 import SegmentedControlTab from 'react-native-segmented-control-tab'
 import ScrollableTabView  from 'react-native-scrollable-tab-view';
-import Zhibo_Tab from '../hometab/Zhibo_Tabs'
+import Zhibo_Tabs from '../hometab/Zhibo_Tabs'
+import Recommend_Tab from '../hometab/Recommend_Tab'
+import Video_Tab from '../hometab/Video_Tab'
 import News_Tab from '../hometab/News_Tabs'
 import FlatList_All from '../homepage/FlatList_All'
 
@@ -89,30 +91,38 @@ export default class Home extends Component {
             <View style={styles.container}>
                 <View style={styles.tab}>
                     <SegmentedControlTab
-                        values={['直播', '新闻', '狂言NBA']}
+                        values={['推荐','直播', '视频', '新闻']}
                         selectedIndex={this.state.customStyleIndex}
                         onTabPress={this.handleCustomIndexSelect}
                         borderRadius={8}
-                        tabsContainerStyle={{ height: 30, backgroundColor: '#F66A85',width:258,alignSelf:'center'}}
-                        tabStyle={{ backgroundColor: '#F66A85', borderWidth: 0,borderColor:'#FFFFFF', borderStyle :'solid',borderWidth:1, }}
+                        tabsContainerStyle={{ height: 30, backgroundColor: '#FFFFFF',width:258,alignSelf:'center'}}
+                        tabStyle={{ backgroundColor: '#FFFFFF', borderWidth: 0,borderColor:'#E7E7E7', borderStyle :'solid',borderWidth:1, }}
                         activeTabStyle={{ backgroundColor: 'white', marginTop: 0, }}
-                        tabTextStyle={{ color: '#FFFFFF'}}
-                        activeTabTextStyle={{ color: '#F66A85' }} />
+                        tabTextStyle={{ color: '#000000'}}
+                        activeTabTextStyle={{ color: '#2979FF' }} />
                 </View>
 
                 <View style={styles.container}>
                     {this.state.customStyleIndex === 0 &&
                         <View style={styles.container}>
-                            <Zhibo_Tab></Zhibo_Tab>
+                            <Recommend_Tab></Recommend_Tab>
                         </View>
                     }
                     {this.state.customStyleIndex === 1 &&
                         <View style={styles.container}>
-                            <News_Tab></News_Tab>
+                            <Zhibo_Tabs></Zhibo_Tabs>
                         </View>
                     }
                     {this.state.customStyleIndex === 2 &&
-                    <View style={styles.tabContent}><Text>333</Text></View>}
+                        <View style={styles.container}>
+                            <Video_Tab></Video_Tab>
+                        </View>
+                    }
+                    {this.state.customStyleIndex === 3 &&
+                    <View style={styles.container}>
+                        <News_Tab></News_Tab>
+                    </View>
+                    }
                 </View>
             </View>
         );
@@ -128,7 +138,7 @@ const styles = StyleSheet.create({
         height: 48,
         justifyContent:'center',
         borderBottomColor:'#F66A85',
-        backgroundColor:'#F66A85'
+        backgroundColor:'#FFFFFF'
     },
     tabViewText: {
         color: '#444444',

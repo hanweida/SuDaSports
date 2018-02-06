@@ -169,7 +169,7 @@ export default class Zhibo_NBA extends React.PureComponent{
     }
 
     onTabPress(item,index){
-        NativeModules.WebviewRNModule.show("http://192.168.100.104:8080/video/getnbaurl.biz?url="+item.url+"&"+"mid="+item.mid);
+        NativeModules.WebviewRNModule.show("http://192.168.1.13:8080/video/getnbaurl.biz?url="+item.url+"&"+"mid="+item.mid);
     }
 
     renderItem = ({item, index}) => {

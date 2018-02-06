@@ -18,7 +18,7 @@ import {
                 <StatusBar
                     animated={true}
                     hidden={false}
-                    backgroundColor={'#F66A85'}
+                    backgroundColor={'#000000'}
                     translucent={false}
                     barStyle={'default'}
                     showHideTransition={'fade'}

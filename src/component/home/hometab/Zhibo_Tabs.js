@@ -12,9 +12,6 @@ import {
     ToastAndroid,
 } from 'react-native'
 
-import FootCustom from './foot_custom';
-import ScrollableTabView  from 'react-native-scrollable-tab-view';
-import Zhibo_All from './Zhibo_All'
 import Zhibo_NBA from './Zhibo_NBA'
 import FlatList_All from '../homepage/FlatList_All'
 import SegmentedControlTab from 'react-native-segmented-control-tab'
@@ -51,27 +48,27 @@ export default class Zhibo_Tabs extends Component{
             <View style={styles.container}>
                 <View style={styles.tab}>
                     <SegmentedControlTab
-                        values={['全部', 'NBA']}
+                        values={['NBA赛事','所有赛事']}
                         selectedIndex={this.state.customStyleIndex}
                         onTabPress={this.handleCustomIndexSelect}
                         borderRadius={0}
-                        tabsContainerStyle={{ height: 44, backgroundColor: '#FFFFFF',width:360,alignSelf:'center'}}
-                        tabStyle={{ backgroundColor: '#FFFFFF',borderWidth:1,borderColor:'#DFDFDF' }}
+                        tabsContainerStyle={{ height: 30, backgroundColor: '#FFFFFF',width:360,alignSelf:'center'}}
+                        tabStyle={{ backgroundColor: '#FFFFFF',borderWidth:0.5,borderColor:'#DFDFDF' }}
                         activeTabStyle={{ backgroundColor: 'white', marginTop: 0, }}
                         tabTextStyle={{ color: '#000000'}}
-                        activeTabTextStyle={{ color: '#F66A85' }} />
+                        activeTabTextStyle={{ color: '#2979FF' }} />
                 </View>
 
                 <View style={styles.container}>
                     {this.state.customStyleIndex === 0 &&
                         <View style={styles.container}>
-                            <FlatList_All></FlatList_All>
+                            <Zhibo_NBA></Zhibo_NBA>
                         </View>
                     }
                     {this.state.customStyleIndex === 1 &&
-                        <View style={styles.container}>
-                            <Zhibo_NBA></Zhibo_NBA>
-                        </View>
+                    <View style={styles.container}>
+                        <FlatList_All></FlatList_All>
+                    </View>
                     }
                 </View>
             </View>

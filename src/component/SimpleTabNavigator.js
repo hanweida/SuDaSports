@@ -164,8 +164,8 @@ const SimpleTabNavigator = TabNavigator(
         tabBarPosition: 'bottom',
         swipeEnabled: false, // 禁止左右滑动
         tabBarOptions: {
-            activeTintColor: '#FF0000',
-            inactiveTintColor: '#2B2B2B', // 文字和图片默认颜色
+            activeTintColor: '#2979FF',
+            inactiveTintColor: '#000000', // 文字和图片默认颜色
             showIcon: true,
             indicatorStyle: {height: 0},
             style: {
@@ -239,13 +239,13 @@ const styles = StyleSheet.create({
     press_button_text:{
         fontSize:15,
         fontFamily:'PingFangSC-Regular',
-        color:'#F66A85'
+        color:'#2979FF'
     },
     press_button:{
         backgroundColor: '#FFFFFF'
     },
     unpress_button:{
-        backgroundColor: '#F66A85',
+        backgroundColor: '#000000',
     },
     app_name:{
 
