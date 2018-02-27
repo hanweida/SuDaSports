@@ -43,6 +43,7 @@ export default class TeamSortPage extends Component{
             .then((resJson)=>{
                  var a = resJson;
                  a = a.replace(new RegExp("rows","gm"),"data");
+                 a = a.replace(new RegExp("title","gm"),"key");
                  var obj = JSON.parse(a);
                  //console.log(JSON.stringify(obj.data));
                 this.setState({
@@ -86,8 +87,8 @@ export default class TeamSortPage extends Component{
     }
 
     _sectionComp = ({section, index}) => {
-        console.log("section：" +section.title);
-        var txt = section.title;
+        console.log("section：" +section.key);
+        var txt = section.key;
         return (
             <View style={[styles.compView,{backgroundColor:"#F66A85"}]}>
                 <Text

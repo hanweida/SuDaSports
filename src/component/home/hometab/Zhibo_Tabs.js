@@ -10,6 +10,7 @@ import {
     BackAndroid,
     TouchableOpacity,
     ToastAndroid,
+    Dimensions
 } from 'react-native'
 
 import Zhibo_NBA from './Zhibo_NBA'
@@ -18,6 +19,7 @@ import SegmentedControlTab from 'react-native-segmented-control-tab'
 
 /** 直播Tab选项*/
 export default class Zhibo_Tabs extends Component{
+
     constructor(props) {
         super(props)
         this.state = {
@@ -44,6 +46,7 @@ export default class Zhibo_Tabs extends Component{
         });
     }
     render() {
+        var deviceWidthDp = Dimensions.get('window').width;
         return (
             <View style={styles.container}>
                 <View style={styles.tab}>
@@ -52,7 +55,7 @@ export default class Zhibo_Tabs extends Component{
                         selectedIndex={this.state.customStyleIndex}
                         onTabPress={this.handleCustomIndexSelect}
                         borderRadius={0}
-                        tabsContainerStyle={{ height: 30, backgroundColor: '#FFFFFF',width:360,alignSelf:'center'}}
+                        tabsContainerStyle={{height: 30,backgroundColor: '#FFFFFF',width: deviceWidthDp,alignSelf:'center'}}
                         tabStyle={{ backgroundColor: '#FFFFFF',borderWidth:0.5,borderColor:'#DFDFDF' }}
                         activeTabStyle={{ backgroundColor: 'white', marginTop: 0, }}
                         tabTextStyle={{ color: '#000000'}}
