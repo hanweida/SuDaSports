@@ -134,6 +134,7 @@ export default class FlatList_All extends React.PureComponent{
                     data={this.state.listData}
                     renderItem={this.renderItem}
                     onEndReached={()=>{
+                      console.log("onEndReached= this.state.myindex");
                         if(this.state.myindex<2){
                           // 到达底部，加载更多列表项
                           if(null != this.getData()){
@@ -142,7 +143,7 @@ export default class FlatList_All extends React.PureComponent{
                               });
                           }
                         }
-                      //console.log("onEndReached=" + this.state.listData.length);
+                      console.log("onEndReached=" + this.state.listData.length);
                     }}
                     refreshing={false}
                     onRefresh={() => {
