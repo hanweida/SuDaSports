@@ -10,27 +10,24 @@ import {
     Alert,
     TouchableOpacity,
     NativeModules,
-    Dimensions
+    Dimensions,
+    SectionList
 } from 'react-native';
+
+import Zhibo_Source from './Zhibo_Source'
 
 /** 全部直播页面*/
 export default class Zhibo_NBA extends React.PureComponent{
     getData(){
         var list = [];
         var responses = fetch('http://120.78.150.194:8080/video/gamenbalist.biz')
+        //var responses = fetch('http://192.168.100.104:8080/video/gamenbalist.biz')
             .then((response) => response.json())
             //获得返回的json
-            .then((responseJson) => {
-                //console.log(JSON.stringify(responseJson));
-                for(var i=0,l=responseJson.length;i<l;i++){
-                    //console.log(JSON.stringify(responseJson[i]));
-                    list.push(this.getArrayList(responseJson[i]));
-                }
-            })
-            .then(()=>{
+            .then((responseJson)=>{
                 this.setState({
                     loaded:true,
-                    listData:list
+                    listData:responseJson
                 });
                 //console.log(JSON.stringify(this.state.listData));
                 return list;
@@ -70,7 +67,8 @@ export default class Zhibo_NBA extends React.PureComponent{
     }
 
     onTabPress(item,index){
-        NativeModules.WebviewRNModule.show("http://192.168.1.13:8080/video/getnbaurl.biz?url="+item.url+"&"+"mid="+item.mid);
+        <Zhibo_Source></Zhibo_Source>
+        //NativeModules.WebviewRNModule.show("http://192.168.1.13:8080/video/getnbaurl.biz?url="+item.match_url+"&"+"mid="+item.mid);
     }
 
     renderItem = ({item, index}) => {
@@ -81,10 +79,10 @@ export default class Zhibo_NBA extends React.PureComponent{
                 <View style={styles.container}>
                     <View style={styles.teamLogo}>
                         <View >
-                            <Image source={{uri:item.firstImageUrl}} style={styles.image} resizeMode='stretch'></Image>
+                            <Image source={{uri:item.guest_logo_url}} style={styles.image} resizeMode='stretch'></Image>
                         </View >
                         <View>
-                            <Text style={styles.text}>{item.first_name}</Text>
+                            <Text style={styles.text}>{item.guest_team}</Text>
                         </View>
                     </View>
                     <View style={styles.scoreInfo}>
@@ -111,15 +109,29 @@ export default class Zhibo_NBA extends React.PureComponent{
                     </View>
                     <View style={styles.teamLogo}>
                         <View >
-                            <Image source={{uri:item.lastImageUrl}} style={styles.image} resizeMode='stretch'></Image>
+                            <Image source={{uri:item.home_logo_url}} style={styles.image} resizeMode='stretch'></Image>
                         </View>
                         <View>
-                            <Text style={styles.text}>{item.last_name}</Text>
+                            <Text style={styles.text}>{item.home_team}</Text>
                         </View>
                     </View>
                 </View>
             </TouchableOpacity>
         );
+    }
+
+
+
+    _sectionComp = ({section, index}) => {
+        var txt = section.key;
+        return (
+            <View style={[styles.compView,{backgroundColor:"#E5E6EC"}]}>
+                <Text
+                    style={{textAlign: 'center', textAlignVertical: 'center', fontSize: 14 }}>{txt}
+                </Text>
+            </View>
+        )
+
     }
 
     /** 渲染视图数据*/
@@ -135,17 +147,31 @@ export default class Zhibo_NBA extends React.PureComponent{
 
 
     _keyExtractor = (item, index) => 'Manufacturer' + index;
+
+    _extraUniqueKey(item ,index){
+        console.log("index"+index);
+        return "index"+index;
+    }
+
     render() {
         if (!this.state.loaded) {
             return this.renderLoadingView();
         }
         return (
             <View style={styles.view}>
-                <FlatList
-                    keyExtractor={this._keyExtractor}
-                    data={this.state.listData}
+                <SectionList
+                    keyExtractor={this._extraUniqueKey}
+                    renderSectionHeader={this._sectionComp}
                     renderItem={this.renderItem}
+                    sections={this.state.listData}
+                    initialNumToRender={8}
+                    refreshing={false}
+                    onRefresh={() => {
+
+                     //console.log("onRefresh=" + this.state.listData.length);
+                    }}
                     onEndReached={()=>{
+                      console.log("onEndReached= myindex：" + this.state.myindex);
                         if(this.state.myindex<2){
                           // 到达底部，加载更多列表项
                           if(null != this.getData()){
@@ -154,21 +180,53 @@ export default class Zhibo_NBA extends React.PureComponent{
                               });
                           }
                         }
-                      //console.log("onEndReached=" + this.state.listData.length);
+                      console.log("onEndReached=" + this.state.listData.length);
                     }}
-                    refreshing={false}
-                    onRefresh={() => {
-                            this.setState({
-                                listData: this.getData(),
-                          });
-                     //console.log("onRefresh=" + this.state.listData.length);
-                    }}
-                    debug={false}
-                    numColumns={1}
-                    ListFooterComponent={this.footerView}
                 />
             </View>
         )
+
+        // return (
+        //     <View style={styles.view}>
+        //         <SectionList
+        //             keyExtractor={this._extraUniqueKey}
+        //             renderSectionHeader={this._sectionComp}
+        //             renderItem={this.renderItem}
+        //             sections={this.state.listData}
+        //             ItemSeparatorComponent={() => <View style={{backgroundColor:"#E7E7E7",height:1}}></View>}
+        //         />
+        //
+        //
+        //         <FlatList
+        //             keyExtractor={this._keyExtractor}
+        //             data={this.state.listData}
+        //             renderItem={this.renderItem}
+        //             onEndReached={()=>{
+        //               console.log("onEndReached= myindex：" + this.state.myindex);
+        //                 if(this.state.myindex<2){
+        //                   // 到达底部，加载更多列表项
+        //                   if(null != this.getData()){
+        //                       this.setState({
+        //                         listData: this.state.listData.concat(this.getData()),
+        //                       });
+        //                   }
+        //                 }
+        //               console.log("onEndReached=" + this.state.listData.length);
+        //             }}
+        //             refreshing={false}
+        //             onRefresh={() => {
+        //                   console.log("onRefresh= myindex：" + this.state.myindex);
+        //                     this.setState({
+        //                         listData: this.getData(),
+        //                   });
+        //              //console.log("onRefresh=" + this.state.listData.length);
+        //             }}
+        //             debug={false}
+        //             numColumns={1}
+        //             ListFooterComponent={this.footerView}
+        //         />
+        //     </View>
+        // )
     }
 
     footerView() {
