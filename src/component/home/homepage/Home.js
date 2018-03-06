@@ -20,12 +20,16 @@ import {
 import SegmentedControlTab from 'react-native-segmented-control-tab'
 import ScrollableTabView  from 'react-native-scrollable-tab-view';
 import Zhibo_Tabs from '../hometab/Zhibo_Tabs'
+import Zhibo_NBA from '../hometab/Zhibo_NBA'
+import Zhibo_Source from '../hometab/Zhibo_Source'
 import Recommend_Tab from '../hometab/Recommend_Tab'
 import Video_Tab from '../hometab/Video_Tab'
 import News_Tab from '../hometab/News_Tabs'
 import FlatList_All from '../homepage/FlatList_All'
 
-export default class Home extends Component {
+import {StackNavigator, TabNavigator} from "react-navigation"
+
+class naviHome extends Component{
     constructor(props) {
         super(props)
         this.state = {
@@ -104,19 +108,19 @@ export default class Home extends Component {
 
                 <View style={styles.container}>
                     {this.state.customStyleIndex === 0 &&
-                        <View style={styles.container}>
-                            <Recommend_Tab></Recommend_Tab>
-                        </View>
+                    <View style={styles.container}>
+                        <Recommend_Tab></Recommend_Tab>
+                    </View>
                     }
                     {this.state.customStyleIndex === 1 &&
-                        <View style={styles.container}>
-                            <Zhibo_Tabs></Zhibo_Tabs>
-                        </View>
+                    <View style={styles.container}>
+                        <Zhibo_NBA prop={this.props}></Zhibo_NBA>
+                    </View>
                     }
                     {this.state.customStyleIndex === 2 &&
-                        <View style={styles.container}>
-                            <Video_Tab></Video_Tab>
-                        </View>
+                    <View style={styles.container}>
+                        <Video_Tab></Video_Tab>
+                    </View>
                     }
                     {this.state.customStyleIndex === 3 &&
                     <View style={styles.container}>
@@ -126,6 +130,51 @@ export default class Home extends Component {
                 </View>
             </View>
         );
+    }
+}
+
+const RouteConfigs = {
+    naviHome: {
+        screen: naviHome // screen属性为必须配置属性
+    },
+    Zhibo_Source: {
+        screen: Zhibo_Source ,
+        navigationOptions: {
+            title: '标题',
+            headerTitleStyle: {fontSize: 18, color: 'red'},
+            headerStyle: {height: 40},
+        },
+    },
+
+}
+
+const StackNavigatorConfig = {
+    initialRouteName: 'naviHome',
+    initialRouteParams: {initPara: '初始页面参数'},
+    navigationOptions: {
+        title: '标题',
+        headerTitleStyle: {fontSize: 18, color: 'red'},
+        headerStyle: {height: 0},
+    },
+    paths: 'page/main',
+    mode: 'card',
+    headerMode: 'screen',
+    cardStyle: {backgroundColor: "#ffffff"},
+    transitionConfig: (() => ({
+    })),
+    onTransitionStart: (() => {
+        console.log('页面跳转动画开始')
+    }),
+    onTransitionEnd: (() => {
+        console.log('页面跳转动画结束')
+    }),
+}
+const Navigator = StackNavigator(RouteConfigs, StackNavigatorConfig)
+export default class Home extends Component {
+    render() {
+        return (
+            <Navigator/>
+        )
     }
 }
 
