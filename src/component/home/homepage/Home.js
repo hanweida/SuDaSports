@@ -37,15 +37,7 @@ class naviHome extends Component{
         }
     }
 
-    static navigationOptions = {
-        tabBarLabel: '首页',
-        tabBarIcon: ({tintColor}) => (
-            <Image
-                source={require('../../../img/tab_icon_home_sel@2x.png')}
-                style={[styles.icon, {tintColor: tintColor}]}
-            />
-        ),
-    };
+
 
     handleSingleIndexSelect = (index) => {
         this.setState({
@@ -167,6 +159,16 @@ const StackNavigatorConfig = {
 }
 const Navigator = StackNavigator(RouteConfigs, StackNavigatorConfig)
 export default class Home extends Component {
+    static navigationOptions = {
+        tabBarLabel: '首页',
+        tabBarIcon: ({tintColor}) => (
+            <Image
+                source={require('../../../img/tab_icon_home_sel@2x.png')}
+                style={[styles.icon, {tintColor: tintColor}]}
+            />
+        ),
+    };
+
     render() {
         return (
             <Navigator/>

@@ -155,6 +155,15 @@ const SimpleTabNavigator = TabNavigator(
     {
         首页: {
             screen: Home,
+            // navigationOptions: ({navigation}) => ({
+            //     tabBarLabel: '首页',
+            //     tabBarIcon: ({tintColor}) => (
+            //         <Image
+            //             source={require('../img/tab_icon_home_sel@2x.png')}
+            //             style={[styles.icon, {tintColor: tintColor}]}
+            //         />
+            //     ),
+            // }),
         },
         TeamSortPage: {
             screen: TeamSortPage,
