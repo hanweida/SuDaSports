@@ -27,10 +27,12 @@ export default class FlatList_All extends React.PureComponent{
                     }
                 })
                 .then(()=>{
-                    this.setState({
-                        loaded:true,
-                        listData:list
-                    });
+                    if(this.mounted){
+                        this.setState({
+                            loaded:true,
+                            listData:list
+                        });
+                    }
                     //console.log(JSON.stringify(this.state.listData));
                     return list;
                 })
@@ -38,7 +40,14 @@ export default class FlatList_All extends React.PureComponent{
                     //console.error(error);
                 });
     }
+    componentWillMount(){
+        this.mounted = true;
+        this.getData();
+    }
 
+    componentWillUnmount() {
+        this.mounted = false;
+    }
     /** 解析每个比赛列表 如：*/
     getArrayList(matchJson){
         //console.log("每场比赛content："+content);

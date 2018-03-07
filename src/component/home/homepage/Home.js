@@ -18,14 +18,12 @@ import {
 } from 'react-native';
 
 import SegmentedControlTab from 'react-native-segmented-control-tab'
-import ScrollableTabView  from 'react-native-scrollable-tab-view';
 import Zhibo_Tabs from '../hometab/Zhibo_Tabs'
-import Zhibo_NBA from '../hometab/Zhibo_NBA'
-import Zhibo_Source from '../hometab/Zhibo_Source'
 import Recommend_Tab from '../hometab/Recommend_Tab'
 import Video_Tab from '../hometab/Video_Tab'
 import News_Tab from '../hometab/News_Tabs'
-import FlatList_All from '../homepage/FlatList_All'
+import Zhibo_NBA from '../hometab/Zhibo_NBA'
+import Zhibo_Source from '../hometab/Zhibo_Source'
 
 import {StackNavigator, TabNavigator} from "react-navigation"
 
@@ -108,19 +106,19 @@ class naviHome extends Component{
 
                 <View style={styles.container}>
                     {this.state.customStyleIndex === 0 &&
-                    <View style={styles.container}>
-                        <Recommend_Tab></Recommend_Tab>
-                    </View>
+                        <View style={styles.container}>
+                            <Recommend_Tab></Recommend_Tab>
+                        </View>
                     }
                     {this.state.customStyleIndex === 1 &&
-                    <View style={styles.container}>
-                        <Zhibo_NBA prop={this.props}></Zhibo_NBA>
-                    </View>
+                        <View style={styles.container}>
+                            <Zhibo_NBA prop={this.props}></Zhibo_NBA>
+                        </View>
                     }
                     {this.state.customStyleIndex === 2 &&
-                    <View style={styles.container}>
-                        <Video_Tab></Video_Tab>
-                    </View>
+                        <View style={styles.container}>
+                            <Video_Tab></Video_Tab>
+                        </View>
                     }
                     {this.state.customStyleIndex === 3 &&
                     <View style={styles.container}>
@@ -132,7 +130,6 @@ class naviHome extends Component{
         );
     }
 }
-
 const RouteConfigs = {
     naviHome: {
         screen: naviHome // screen属性为必须配置属性
@@ -147,7 +144,6 @@ const RouteConfigs = {
     },
 
 }
-
 const StackNavigatorConfig = {
     initialRouteName: 'naviHome',
     initialRouteParams: {initPara: '初始页面参数'},
@@ -177,7 +173,6 @@ export default class Home extends Component {
         )
     }
 }
-
 const styles = StyleSheet.create({
     container: {
         flex:1,

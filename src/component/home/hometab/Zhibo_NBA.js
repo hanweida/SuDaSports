@@ -18,45 +18,6 @@ import Zhibo_Source from './Zhibo_Source'
 
 /** 全部直播页面*/
 export default class Zhibo_NBA extends React.PureComponent{
-    getData(){
-        var list = [];
-        var responses = fetch('http://120.78.150.194:8080/video/gamenbalist.biz')
-        //var responses = fetch('http://192.168.100.104:8080/video/gamenbalist.biz')
-            .then((response) => response.json())
-            //获得返回的json
-            .then((responseJson)=>{
-                this.setState({
-                    loaded:true,
-                    listData:responseJson
-                });
-                //console.log(JSON.stringify(this.state.listData));
-                return list;
-            })
-            .catch((error) => {
-                //console.error(error);
-            });
-    }
-
-    /** 解析每个比赛列表 如：*/
-    getArrayList(matchJson){
-        //console.log("每场比赛content："+content);
-        var obj = {};
-        obj.url= matchJson.match_url;
-        obj.firstImageUrl = matchJson.guest_logo_url;
-        obj.lastImageUrl = matchJson.home_logo_url;
-        obj.first_name= matchJson.guest_team;
-        obj.time= matchJson.match_time;
-        obj.last_name = matchJson.home_team;
-        obj.home_team_score = matchJson.home_team_score;
-        obj.guest_team_score = matchJson.guest_team_score;
-        obj.match_quarter = matchJson.match_quarter;
-        obj.match_quarterTime = matchJson.match_quarterTime;
-        obj.mid = matchJson.mid;
-        obj.match_desc = matchJson.match_desc;
-        obj.start_time = matchJson.start_time;
-        return obj;
-    }
-
     constructor(props) {
         super(props);
         this.state = {
@@ -66,8 +27,56 @@ export default class Zhibo_NBA extends React.PureComponent{
         };
     }
 
+    getData(){
+        var list = [];
+        var responses = fetch('http://120.78.150.194:8080/video/gamenbalist.biz')
+        //var responses = fetch('http://192.168.100.104:8080/video/gamenbalist.biz')
+            .then((response) => response.json())
+            //获得返回的json
+            .then((responseJson)=>{
+                if(this.mounted){
+                    this.setState({
+                        loaded:true,
+                        listData:responseJson
+                    });
+                }
+                //console.log(JSON.stringify(this.state.listData));
+            })
+            .catch((error) => {
+                //console.error(error);
+            });
+    }
+    componentWillMount(){
+        this.mounted = true;
+        this.getData();
+    }
+
+    componentWillUnmount() {
+        this.mounted = false;
+    }
+    /** 解析每个比赛列表 如：*/
+    // getArrayList(matchJson){
+    //     //console.log("每场比赛content："+content);
+    //     var obj = {};
+    //     obj.url= matchJson.match_url;
+    //     obj.firstImageUrl = matchJson.guest_logo_url;
+    //     obj.lastImageUrl = matchJson.home_logo_url;
+    //     obj.first_name= matchJson.guest_team;
+    //     obj.time= matchJson.match_time;
+    //     obj.last_name = matchJson.home_team;
+    //     obj.home_team_score = matchJson.home_team_score;
+    //     obj.guest_team_score = matchJson.guest_team_score;
+    //     obj.match_quarter = matchJson.match_quarter;
+    //     obj.match_quarterTime = matchJson.match_quarterTime;
+    //     obj.mid = matchJson.mid;
+    //     obj.match_desc = matchJson.match_desc;
+    //     obj.start_time = matchJson.start_time;
+    //     return obj;
+    // }
+
+
     onTabPress(item,index){
-        this.props.prop.navigation.navigate('Zhibo_Source')
+        this.props.prop.navigation.navigate('Zhibo_Source',{item:item})
 
         //NativeModules.WebviewRNModule.show("http://192.168.1.13:8080/video/getnbaurl.biz?url="+item.match_url+"&"+"mid="+item.mid);
     }
