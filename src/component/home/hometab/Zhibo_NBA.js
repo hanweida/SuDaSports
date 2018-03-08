@@ -14,7 +14,7 @@ import {
     SectionList
 } from 'react-native';
 
-import Zhibo_Source from './Zhibo_Source'
+import Zhibo_Match from './Zhibo_Match'
 
 /** 全部直播页面*/
 export default class Zhibo_NBA extends React.PureComponent{
@@ -76,7 +76,7 @@ export default class Zhibo_NBA extends React.PureComponent{
 
 
     onTabPress(item,index){
-        this.props.prop.navigation.navigate('Zhibo_Source',{item:item})
+        this.props.prop.navigation.navigate('Zhibo_Match',{item:item})
 
         //NativeModules.WebviewRNModule.show("http://192.168.1.13:8080/video/getnbaurl.biz?url="+item.match_url+"&"+"mid="+item.mid);
     }

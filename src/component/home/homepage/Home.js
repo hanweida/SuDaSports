@@ -23,7 +23,7 @@ import Recommend_Tab from '../hometab/Recommend_Tab'
 import Video_Tab from '../hometab/Video_Tab'
 import News_Tab from '../hometab/News_Tabs'
 import Zhibo_NBA from '../hometab/Zhibo_NBA'
-import Zhibo_Source from '../hometab/Zhibo_Source'
+import Zhibo_Match from '../hometab/Zhibo_Match'
 
 import {StackNavigator, TabNavigator} from "react-navigation"
 
@@ -126,8 +126,8 @@ const RouteConfigs = {
     naviHome: {
         screen: naviHome // screen属性为必须配置属性
     },
-    Zhibo_Source: {
-        screen: Zhibo_Source ,
+    Zhibo_Match: {
+        screen: Zhibo_Match ,
         navigationOptions: {
             title: '标题',
             headerTitleStyle: {fontSize: 18, color: 'red'},
