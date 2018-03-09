@@ -11,7 +11,7 @@ import {
     TouchableOpacity,
     NativeModules,
     Dimensions,
-    SectionList
+    SectionList,
 } from 'react-native';
 
 
@@ -27,49 +27,81 @@ export default class Zhibo_Match extends React.PureComponent{
       constructor(props) {
         super(props);
         // 初始状态
-        this.state = {data:null,loaded:false};
-          const navi = this.props.navigation;
-          const {navigate,goBack,state} = navi;
-        //alert(state.params.item.guest_team);
+        this.state = {matchdata:null,loaded:false};
+
       }
+
+    componentWillMount(){
+        this.mounted = true;
+    }
 
     componentDidMount() {
         this.getData();
     }
 
+    componentWillUnmount() {
+        this.mounted = false;
+    }
+
+    onTabPress(item, mid){
+        NativeModules.WebviewRNModule.show("http://192.168.100.104:8080/video/getnbaurl.biz?url="+item.sourceValue+"&"+"mid="+mid+"&"+"sourceName="+item.sourceName);
+    }
+    /** 渲染视图数据*/
+    renderLoadingView(){
+        return (
+            <View >
+                <Text>
+                    正在加载...
+                </Text>
+            </View>
+        );
+    }
     render(){
-        //赋值为navi
-
-        //alert(navi.state.params.item.guest_team);
-
-        //获取navigation的属性方法，navigate,goBack,state都是navigation的方法
-        //const {navigate,goBack,state} = this.props.navigation;
-        //alert(state.params.item.guest_team);
-
+        if (!this.state.loaded) {
+            return this.renderLoadingView();
+        }
+        let arr = [];
+        const matchData = this.state.matchdata.data;
+        //console.log(this.state.matchdata.data.matchSourceList[0].liveSource);
+        for(let i in this.state.matchdata.data.matchSourceList){
+            let customComponent = (
+                <View  key={i}>
+                    <TouchableOpacity onPress={this.onTabPress.bind(this, matchData.matchSourceList[i],matchData.mid)}
+                    >
+                        <Text>{matchData.matchSourceList[i].sourceName}</Text>
+                    </TouchableOpacity>
+                </View>
+            );
+            arr.push(customComponent);
+            //console.log(this.state.matchdata.data.matchSourceList[i].liveSource);
+        }
         return(
             <View>
-                <Text>
-                    Zhibo_Source
-                </Text>
+                <View>{arr}</View>
             </View>
         );
     }
 
     //请求数据
     getData(){
+        const navi = this.props.navigation;
+        const {state} = navi;
+
         var list = [];
-        fetch('http://192.168.100.104:8080/video/gamenbalist.biz')
+        fetch('http://192.168.100.104:8080/gamedata/matchStat.biz?' +
+            'mid='+state.params.item.mid+"&tabType=2&homeTeamName="+state.params.item.home_team+"&guestTeamName="+state.params.item.guest_team)
         //var responses = fetch('http://192.168.100.104:8080/video/gamenbalist.biz')
             .then((response) => response.json())
             //获得返回的json
             .then((responseJson)=>{
                 if(this.mounted){
+                    //alert(JSON.stringify(responseJson));
                     this.setState({
                         loaded:true,
-                        listData:responseJson
+                        matchdata:responseJson
                     });
                 }
-                //console.log(JSON.stringify(this.state.listData));
+                //console.log(JSON.stringify(data));
             })
             .catch((error) => {
                 //console.error(error);

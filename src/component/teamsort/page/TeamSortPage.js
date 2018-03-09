@@ -52,7 +52,7 @@ export default class TeamSortPage extends Component{
                 });
             })
             .then(()=>{
-                console.log("ListData："+JSON.stringify(this.state.listData));
+                //console.log("ListData："+JSON.stringify(this.state.listData));
             });
     }
 
@@ -87,7 +87,7 @@ export default class TeamSortPage extends Component{
     }
 
     _sectionComp = ({section, index}) => {
-        console.log("section：" +section.key);
+        //console.log("section：" +section.key);
         var txt = section.key;
         return (
             <View style={[styles.compView,{backgroundColor:"#F66A85"}]}>
@@ -114,7 +114,7 @@ export default class TeamSortPage extends Component{
     _keyExtractor = (item, index) => 'Manufacturer' + index;
 
     _extraUniqueKey(item ,index){
-        console.log("index"+index+item[0].name);
+        //console.log("index"+index+item[0].name);
         return "index"+index+item[0].name;
     }
 

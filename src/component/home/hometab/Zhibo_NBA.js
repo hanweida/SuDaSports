@@ -159,7 +159,7 @@ export default class Zhibo_NBA extends React.PureComponent{
     _keyExtractor = (item, index) => 'Manufacturer' + index;
 
     _extraUniqueKey(item ,index){
-        console.log("index"+index);
+        //console.log("index"+index);
         return "index"+index;
     }
 
@@ -181,7 +181,7 @@ export default class Zhibo_NBA extends React.PureComponent{
                      //console.log("onRefresh=" + this.state.listData.length);
                     }}
                     onEndReached={()=>{
-                      console.log("onEndReached= myindex：" + this.state.myindex);
+                      //console.log("onEndReached= myindex：" + this.state.myindex);
                         if(this.state.myindex<2){
                           // 到达底部，加载更多列表项
                           if(null != this.getData()){
@@ -190,7 +190,7 @@ export default class Zhibo_NBA extends React.PureComponent{
                               });
                           }
                         }
-                      console.log("onEndReached=" + this.state.listData.length);
+                      //console.log("onEndReached=" + this.state.listData.length);
                     }}
                 />
             </View>
