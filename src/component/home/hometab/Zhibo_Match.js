@@ -44,8 +44,11 @@ export default class Zhibo_Match extends React.PureComponent{
     }
 
     onTabPress(item, mid){
-        NativeModules.WebviewRNModule.show("http://192.168.1.13:8080/video/getnbaurl.biz?url="+item.sourceValue+"&"+"mid="+mid+"&"+"sourceName="+item.sourceName);
-        //NativeModules.WebviewRNModule.show("http://120.78.150.194:8080/biz/test.html");
+        NativeModules.WebviewRNModule.show("http://120.78.150.194:8080/video/getnbaurl.biz?url="+item.sourceValue+"&"+"mid="+mid+"&"+"sourceName="+item.sourceName);
+        //NativeModules.WebviewRNModule.show("http://192.168.100.104:8080/video/getnbaurl.biz?url="+item.sourceValue+"&"+"mid="+mid+"&"+"sourceName="+item.sourceName);
+        //NativeModules.WebviewRNModule.show("http://m.didiaokan.com");
+        //NativeModules.WebviewRNModule.show("http://192.168.100.104:8080/biz/test.html");
+        //NativeModules.WebviewRNModule.show("http://baishi.baidu.com/watch/04437156001742011395.html");
     }
     /** 渲染视图数据*/
     renderLoadingView(){
@@ -89,7 +92,7 @@ export default class Zhibo_Match extends React.PureComponent{
         const {state} = navi;
 
         var list = [];
-        const matchStatUrl = "http://192.168.1.13:8080/gamedata/matchStat.biz?mid="+state.params.item.mid+"&tabType=2&homeTeamName="+state.params.item.home_team+"&guestTeamName="+state.params.item.guest_team;
+        const matchStatUrl = "http://120.78.150.194:8080/gamedata/matchStat.biz?mid="+state.params.item.mid+"&tabType=2&homeTeamName="+state.params.item.home_team+"&guestTeamName="+state.params.item.guest_team;
         //const matchStatUrl = "http://192.168.1.13:8080/gamedata/matchStat.biz?mid="+state.params.item.mid+"&tabType=2&homeTeamName=独行侠&guestTeamName=灰熊";
         fetch(matchStatUrl)
         //var responses = fetch('http://192.168.100.104:8080/video/gamenbalist.biz')

@@ -78,7 +78,7 @@ export default class Zhibo_NBA extends React.PureComponent{
     onTabPress(item,index){
         this.props.prop.navigation.navigate('Zhibo_Match',{item:item})
 
-        //NativeModules.WebviewRNModule.show("http://192.168.1.13:8080/video/getnbaurl.biz?url="+item.match_url+"&"+"mid="+item.mid);
+        //NativeModules.WebviewRNModule.show("http://m.didiaokan.com/poay/1w.php");
     }
 
     renderItem = ({item, index}) => {
