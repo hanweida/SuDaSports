@@ -9,6 +9,7 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.widget.TextView;
 
+import com.tencent.smtt.export.external.interfaces.IX5WebSettings;
 import com.tencent.smtt.export.external.interfaces.WebResourceRequest;
 import com.tencent.smtt.export.external.interfaces.WebResourceResponse;
 import com.tencent.smtt.sdk.QbSdk;
@@ -86,10 +87,10 @@ public class X5WebView extends WebView {
 		webSetting.setDomStorageEnabled(true);
 		webSetting.setGeolocationEnabled(true);
 		webSetting.setAppCacheMaxSize(Long.MAX_VALUE);
-		//webSetting.setPageCacheCapacity(IX5WebSettings.DEFAULT_CACHE_CAPACITY);
 		webSetting.setPluginState(WebSettings.PluginState.ON_DEMAND);
 		webSetting.setRenderPriority(WebSettings.RenderPriority.HIGH);
 		webSetting.setCacheMode(WebSettings.LOAD_DEFAULT);
+		webSetting.setMediaPlaybackRequiresUserGesture(false);
 	}
 
 //	@Override
