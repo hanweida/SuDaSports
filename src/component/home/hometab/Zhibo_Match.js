@@ -44,7 +44,7 @@ export default class Zhibo_Match extends React.PureComponent{
     }
 
     onTabPress(item, mid){
-        NativeModules.WebviewRNModule.show("http://120.78.150.194:8080/video/getnbaurl.biz?url="+item.sourceValue+"&"+"mid="+mid+"&"+"sourceName="+item.sourceName);
+        NativeModules.WebviewRNModule.show("http://120.78.150.194:8080/video/getnbaurl.biz?url="+item.sourceValue+"&"+"mid="+mid+"&"+"sourceName="+item.sourceName+"&"+"liveSource="+item.liveSource);
         //NativeModules.WebviewRNModule.show("http://192.168.100.104:8080/video/getnbaurl.biz?url="+item.sourceValue+"&"+"mid="+mid+"&"+"sourceName="+item.sourceName);
         //NativeModules.WebviewRNModule.show("http://m.didiaokan.com");
         //NativeModules.WebviewRNModule.show("http://192.168.100.104:8080/biz/test.html");
