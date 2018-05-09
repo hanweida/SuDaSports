@@ -16,12 +16,6 @@ export default class App extends Component {
         super(props);
     }
     render(){
-        // return(
-        //     <View style={styles.container}>
-        //         <FlatList_All></FlatList_All>
-        //     </View>
-        // );
-
         return(
             <View style={styles.container}>
                 <Header></Header>

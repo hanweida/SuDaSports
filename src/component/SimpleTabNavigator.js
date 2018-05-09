@@ -90,45 +90,16 @@ import React from 'react';
 
 import {
     Button,
-    ScrollView,
-    Text,
     StyleSheet,
     Image,
-    View,
-    TouchableOpacity,
-    TouchableHighlight,
-    Alert
 } from 'react-native';
 
 import {
     TabNavigator,
 } from 'react-navigation';
 
-import ZhiBoScreen from  './home/homepage/ZhiBoScreen'
 import Home from  './home/homepage/Home'
 import TeamSortPage from  './teamsort/page/TeamSortPage'
-
-
-class MyNotificationsScreen extends React.Component {
-    static navigationOptions = {
-        tabBarLabel: 'Notifications',
-        tabBarIcon: ({tintColor}) => (
-            <Image
-                source={require('../img/tab_icon_home_sel@2x.png')}
-                style={[styles.icon, {tintColor: tintColor}]}
-            />
-        ),
-    };
-
-    render() {
-        return (
-            <Button
-                onPress={() => this.props.navigation.goBack()}
-                title="Go back home"
-            />
-        );
-    }
-}
 
 class MyNotifiScreen extends React.Component {
     static navigationOptions = {
@@ -155,15 +126,6 @@ const SimpleTabNavigator = TabNavigator(
     {
         首页: {
             screen: Home,
-            // navigationOptions: ({navigation}) => ({
-            //     tabBarLabel: '首页',
-            //     tabBarIcon: ({tintColor}) => (
-            //         <Image
-            //             source={require('../img/tab_icon_home_sel@2x.png')}
-            //             style={[styles.icon, {tintColor: tintColor}]}
-            //         />
-            //     ),
-            // }),
         },
         TeamSortPage: {
             screen: TeamSortPage,

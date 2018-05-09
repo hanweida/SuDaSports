@@ -1,19 +1,10 @@
 import React,{Component} from 'react'
 import {
-    View,
-    Text,
     StyleSheet,
-    StatusBar,
-    Image,
-    WebView,
-    Platform,
-    BackAndroid,
-    TouchableOpacity,
     ToastAndroid,
 } from 'react-native'
 
 import SimpleTabNavigator  from './SimpleTabNavigator';
-import FlatList_All  from './home/homepage/FlatList_All';
 export default class Footer extends Component{
     constructor(props) {
         super(props);

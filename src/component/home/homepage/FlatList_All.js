@@ -2,12 +2,10 @@
 import React, {Component} from 'react';
 import {
     FlatList,
-    AppRegistry,
     StyleSheet,
     Text,
     View,
     Image,
-    Alert,
     TouchableOpacity,
     NativeModules
 } from 'react-native';
@@ -130,7 +128,6 @@ export default class FlatList_All extends React.PureComponent{
         );
     }
 
-  
     _keyExtractor = (item, index) => 'Manufacturer' + index;
     render() {
         if (!this.state.loaded) {

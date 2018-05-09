@@ -4,6 +4,7 @@
  * @flow
  */
 
+// noinspection JSAnnotator
 import React, { Component } from 'react';
 import {
     AppRegistry,

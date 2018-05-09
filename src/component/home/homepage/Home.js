@@ -6,28 +6,21 @@
 
 import React, { Component,PropTypes } from 'react';
 import {
-    AppRegistry,
     StyleSheet,
-    TouchableOpacity,
     View,
-    Text,
-    NativeModules,
-    processColor,
-    WebView,
     Image
 } from 'react-native';
 
 import SegmentedControlTab from 'react-native-segmented-control-tab'
-import Zhibo_Tabs from '../hometab/Zhibo_Tabs'
 import Recommend_Tab from '../hometab/Recommend_Tab'
 import Video_Tab from '../hometab/Video_Tab'
 import News_Tab from '../hometab/News_Tabs'
 import Zhibo_NBA from '../hometab/Zhibo_NBA'
 import Zhibo_Match from '../hometab/Zhibo_Match'
 
-import {StackNavigator, TabNavigator} from "react-navigation"
+import {StackNavigator} from "react-navigation"
 
-class naviHome extends Component{
+class NaviHome extends Component{
     constructor(props) {
         super(props)
         this.state = {
@@ -36,8 +29,6 @@ class naviHome extends Component{
             customStyleIndex: 1,
         }
     }
-
-
 
     handleSingleIndexSelect = (index) => {
         this.setState({
@@ -123,8 +114,8 @@ class naviHome extends Component{
     }
 }
 const RouteConfigs = {
-    naviHome: {
-        screen: naviHome // screen属性为必须配置属性
+    NaviHome: {
+        screen: NaviHome // screen属性为必须配置属性
     },
     Zhibo_Match: {
         screen: Zhibo_Match ,
@@ -137,14 +128,13 @@ const RouteConfigs = {
 
 }
 const StackNavigatorConfig = {
-    initialRouteName: 'naviHome',
+    initialRouteName: 'NaviHome',
     initialRouteParams: {initPara: '初始页面参数'},
     navigationOptions: {
         title: '标题',
         headerTitleStyle: {fontSize: 18, color: 'red'},
         headerStyle: {height: 0},
     },
-    paths: 'page/main',
     mode: 'card',
     headerMode: 'screen',
     cardStyle: {backgroundColor: "#ffffff"},
@@ -156,7 +146,7 @@ const StackNavigatorConfig = {
     onTransitionEnd: (() => {
         console.log('页面跳转动画结束')
     }),
-}
+};
 const Navigator = StackNavigator(RouteConfigs, StackNavigatorConfig)
 export default class Home extends Component {
     static navigationOptions = {
